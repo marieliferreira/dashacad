@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-form.css">
+    <title>DashAcad</title>
+</head>
+<body>
+    <div class="cabecalho-branco-home">
+
+
+        <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="imagens/foto.png" alt="Foto do perfil" class="img-fluid rounded-circle">
+                  </div>
+                  <div class="col-sm-8">
+                    <h6 id="nome-usuario">Nome do usuário</h6>
+                    <p id="email-usuario">emaildousuário@gmail</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 text-center">
+                <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" class="img-fluid">
+              </div>
+              <div class="col-sm-4 text-right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"      class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+
+    <div id="titulo-form">
+        <input type="text" id="input-titulo-form" placeholder="Título">
+        <input type="text" id="input-desc-form" placeholder="Descrição" >
+    </div>
+
+    <div class="menu-vertical-formulario">
+        <div id="div-detalhes">
+            <p class="p-div-conteudo">Detalhes:</p>
+            <p>
+                <label class="lbl-div-detalhes" id="lbl-pontuacao-form" for="input-pontuacao-form">Pontuação máxima:</label>
+                <input id="input-pontuacao-form" type="number">
+            </p>
+            <p>
+                <label class="lbl-div-detalhes" id="lbl-turma-form" for="select-turma-form" style="width: 60px;">Turma:</label>
+                <select class="select-div-detalhes" id="select-turma-form" name="turma">
+                    <option value="1ano">1º Ano</option>
+                    <option value="2ano">2º Ano</option>
+                    <option value="3ano">3º Ano</option>
+                </select>
+            </p>
+            <p>
+                <label class="lbl-div-detalhes" id="lbl-materia-form" for="select-materia-form" style="width: 60px;">Matéria:</label>
+                <select class="select-div-detalhes"  id="select-materia-form" name="materia">
+                    <option value="historia">História</option>
+                    <option value="matematica">Matemática</option>
+                    <option value="ciencias">Ciências</option>
+                </select>
+            </p>
+        </div>
+        <div id="div-usuario">
+            <p class="p-div-conteudo">Usuário:</p>
+            <input id="input-identificar-usuario" type="radio">
+            <label for="input-identificar-usuario">Identificar</label>
+        </div>
+        <div id="div-prazo">
+            <p class="p-div-conteudo">Prazo:</p>
+            <label for="input-date-prazo"></label>
+            <input id="input-date-prazo" type="date">
+        </div>
+        <button id="btn-create-form">Criar</button>
+    </div>
+
+    <button id="button-add-pergunta" onclick="addQuestion()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg></button>
+
+    <div id="questions-container">
+    
+    
+    </div>
+</body>
+</html>
+
+<script src="form.js"></script>

@@ -1,0 +1,508 @@
+a{
+  text-decoration: none;
+}
+
+#lbl-codigo-form{
+  position: absolute;
+  color: #FFFFFF;
+  font-size: 20px;
+  left: 30px;
+  top: 25px;
+
+  font-family: sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+#titulo-form{
+    position: absolute;
+    width: 800px;
+    height: 150px;
+    left: 300px;
+    top: 100px;
+    background: #023D54;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+#input-titulo-form{
+    position: absolute;
+    top: 20px;
+    width: 650px;
+    height: 30px;
+
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+
+    background: #023D54;
+    color: #ffffff;
+    left: 70px;
+    border: 1px solid #ffffff;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+
+#input-desc-form{
+    position: absolute;
+    top: 60px;
+    width: 650px;
+    height: 70px;
+    background: #023D54;
+    color: #ffffff;
+    left: 70px;
+    border: 1px solid #ffffff;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+
+.question-input{
+    border: none;
+    width: 600px;
+    border-top: 1px solid #000000;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    height: 1px;
+}
+
+
+
+.question{
+    position: relative;
+    top: 380px;
+    width: 800px;
+    left: 300px;
+    padding: 20px 40px 20px 40px;
+    margin-bottom: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+
+
+#div-new-questao{
+  position: relative;
+  top: 280px;
+  left: 450px;
+}
+
+#h6-new-questao{
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 22px;
+  color: #023D54;
+}
+
+#input-new-questao{
+  height: 80px;
+  width: 500px;
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 16px;
+}
+
+#btn-criar-questao{
+  position: absolute;
+  width: 100px;
+  left: 200px;
+  background-color: #023D54;
+  color: #FFFFFF;
+}
+
+.option-text-input-class{
+    font-family: sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    width: 420px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.remove-question-btn{
+    position: absolute;
+    top: 12px;
+    left: 750px;
+    color:#767676;
+    font-family: 'Nunito';
+    font-weight: 500;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+}
+
+.remove-question-btn:hover{
+    color: #000000;
+}
+
+.option-input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+  }
+  
+  .option-input[type="radio"]::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  .option-input[type="radio"]:checked::before {
+    background-color: #023D54;
+  }
+  
+  .options-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .add-option-btn{
+    color: rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 2px;
+  }
+
+  .add-option-btn:hover{
+    color: #023D54;
+    background: #ffffff;
+    border: 1px solid #023D54;
+    border-radius: 5px;
+    padding: 2px;
+  }
+
+  .remove-option-btn{
+    border: none;
+    background: none;
+    color: #767676;
+  }
+
+  .remove-option-btn:hover{
+    border: none;
+    background: none;
+    color: #000000;
+  }
+
+  .option-checkbox-input{
+    margin-left: 10px;
+  }
+
+  .btn-salvar-opcao{
+    margin-left: 100px;
+    margin-right: 10px;
+    border: none;
+    background-color: transparent;
+  }
+
+  #img-btn-salvar{
+    height: 15px;
+    width: 15px;
+  }
+
+#div-tbl{
+  position: absolute;
+  width: 1000px;
+  height: 550px;
+  left: 200px;
+  top: 80px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px; 
+}
+
+tbody{
+  position: absolute;
+  width: 800px;
+  top: 100px;
+  left: 100px;
+  padding: 30px 50px 30px 50px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+tr{
+  display: block;
+  width: 700px;
+  height: 40px;
+  width: 700px;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 10px;
+}
+
+td{
+  color: #023D54;
+}
+
+#tbl-cod-form{
+  width: 30px;
+  border-right: 1px solid  #023D54;
+  margin-right: 10px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 30px;
+  color: #023D54;
+
+}
+
+#tbl-titulo-form{
+  padding-left: 10px;
+  width: 320px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 30px;
+  color: #023D54;
+}
+
+#tbl-disciplina-nome{
+  width: 250px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 30px;
+  color: #023D54;
+}
+
+#btn-voltar{
+  position: absolute;
+  top: 80px;
+  left: 45px;
+  color: #767676;
+  font-size: 22px;
+}
+
+#btn-voltar-registro{
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  color: #767676;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+.btn-adicionar{
+  color: #767676;
+  margin-right: 10px;
+}
+
+.btn-editar{
+  color: #767676;
+  margin-right: 10px;
+}
+
+.btn-excluir{
+  color: #767676;
+}
+
+#h4-form{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 410px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-reg-form{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 280px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#modal-registro-form{
+  position: absolute;
+  width: 800px;
+  height: 550px;
+  left: 280px;
+  top: 80px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px; 
+  padding: 100px 50px 100px 50px;
+}
+
+#div-registro-form{
+  padding: 30px;
+  border: 1px solid #000000;
+  height: 370px;
+}
+
+#titulo{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 80px;
+  top: 120px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#input-titulo{
+    box-sizing: border-box;
+    position: absolute;
+    width: 640px;
+    height: 30px;
+    left: 80px;
+    top: 160px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+}
+
+#descricao{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 80px;
+  top: 220px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#input-descricao{
+    box-sizing: border-box;
+    position: absolute;
+    width: 640px;
+    height: 114px;
+    left: 80px;
+    top: 260px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+}
+
+#lbl-turma{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 130px;
+  top: 390px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#turma{
+    position: absolute;
+    width: 150px;
+    height: 30px;
+    left: 80px;
+    top: 420px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+}
+
+#lbl-disciplina{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 365px;
+  top: 390px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#disciplina{
+    position: absolute;
+    width: 150px;
+    height: 30px;
+    left: 330px;
+    top: 420px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+}
+
+#lbl-prazo-form{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 620px;
+  top: 390px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#input-prazo-form{
+    position: absolute;
+    width: 150px;
+    height: 30px;
+    left: 570px;
+    top: 420px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+}
+
+#btn-salvar-form{
+    position: absolute;
+    color: #FFFFFF;
+    top: 490px;
+    left: 330px;
+    width: 147px;
+    height: 40px;
+    background: #023D54;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+#span-salvo{
+  margin-left: 10px;
+  color: #7676767e;
+}
+
+.botao-desabilitado {
+  opacity: 0.5; /* Define a opacidade do botão para 50% */
+  pointer-events: none; /* Impede eventos de clique no botão */
+}
