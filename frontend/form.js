@@ -1,7 +1,6 @@
 var questionCount = 1; // Variável para controlar o número da pergunta
 var letterCounter = 0;
 
-
 function addQuestion(codigo_questao, nome_questao) {
   var questionsForm = document.getElementById("questions-form");
 
@@ -32,7 +31,7 @@ function addQuestion(codigo_questao, nome_questao) {
   removeQuestionButton.type = "button";
   removeQuestionButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/></svg>';
   removeQuestionButton.onclick = function() {
-    removeQuestion(this);
+    removeQuestion(this, codigo_questao, nome_questao);
   };
 
   questionDiv.appendChild(questionLabel);
@@ -48,9 +47,7 @@ function addQuestion(codigo_questao, nome_questao) {
 }
 
 function renumberQuestions(codigo_questao, nome_questao) {
-  //alert(codigo_questao);
   var questionDivs = document.querySelectorAll("#question-" + codigo_questao);
-
 
   questionDivs.forEach(function(questionDiv, index) {
     var questionLabel = questionDiv.querySelector("label");
@@ -59,37 +56,24 @@ function renumberQuestions(codigo_questao, nome_questao) {
   });
 }
 
-
-var letterCounter = 0;
-
 function addOption(button, codigo_questao) {
   var optionsList = button.parentNode.querySelector(".options-list");
 
   var optionListItem = document.createElement("li");
+  var codigo_alternativa = generateUniqueId(); // Gerar um código único para a alternativa
+  optionListItem.setAttribute("data-codigo-alternativa", codigo_alternativa);
   
   var optionForm = document.createElement("form");
   optionForm.className = "option-class-form";
   optionForm.id = "option-form";
   optionForm.method = "POST";
 
-
-  /*var optionInput = document.createElement("input");
-  optionInput.className = "option-input";
-  optionInput.id = "option-input-id";
-  optionInput.type = "radio";
-  optionInput.name = "opcao-" + button.parentNode.parentNode.querySelector(".question-input").name.split("-")[1];
-  optionInput.value = codigo_questao;*/
-
-
-  // cria a label
   var optionLabel = document.createElement("label");
   optionLabel.className = "option-label";
   
-  // cria o elemento span para a letra
   var optionLetter = document.createElement("span");
   optionLetter.className = "option-letter";
   optionLetter.textContent = String.fromCharCode(65 + optionsList.children.length); // 65 é o código ASCII para 'A'
-
 
   var optionTextInput = document.createElement("input");
   optionTextInput.className = "option-text-input-class";
@@ -97,7 +81,6 @@ function addOption(button, codigo_questao) {
   optionTextInput.name = "option-text";
   optionTextInput.type = "text";
   optionTextInput.placeholder = "alternativa";
-
 
   var optionHiddenInput = document.createElement("input");
   optionHiddenInput.className = "option-hidden-input-class";
@@ -122,9 +105,7 @@ function addOption(button, codigo_questao) {
     }
   });
 
-
   var salvarOptionButton = document.createElement("button");
-  //salvarOptionButton.href = "#";
   salvarOptionButton.className = "btn-salvar-opcao";
   salvarOptionButton.id = "id-btn-salvar-opcao";
   salvarOptionButton.type = "button";
@@ -137,7 +118,6 @@ function addOption(button, codigo_questao) {
   spanSalvo.className = "fas fa-check";
   spanSalvo.id = "span-salvo";
   
-  
   var removeOptionButton = document.createElement("button");
   removeOptionButton.className = "remove-option-btn";
   removeOptionButton.type = "button";
@@ -145,8 +125,6 @@ function addOption(button, codigo_questao) {
   removeOptionButton.onclick = function() {
     removeOption(this);
   };
-
-  
 
   optionListItem.className = "option-container";
 
@@ -161,29 +139,39 @@ function addOption(button, codigo_questao) {
   optionForm.appendChild(spanSalvo);
   optionsList.appendChild(optionListItem);
 
-
-  // adiciona a label ao div de opções
-  document.getElementById("options").appendChild(optionForm);
-
-  // atualiza o contador de letras
   letterCounter++;
 }
 
-
-
-
-function removeQuestion(button) {
+function removeQuestion(button, codigo_questao, nome_questao) {
   var questionDiv = button.parentNode;
   questionDiv.parentNode.removeChild(questionDiv);
-  renumberQuestions();
+  renumberQuestions(codigo_questao, nome_questao);
 }
 
 function removeOption(button) {
   var optionListItem = button.parentNode;
-  optionListItem.parentNode.removeChild(optionListItem);
-  var optionLetter = document.createElement("span");
-  optionLetter.className = "option-letter";
-  optionLetter.textContent = String.fromCharCode(65 + letterCounter--); // 65 é o código ASCII para 'A'
+  var codigoAlternativa = optionListItem.dataset.codigoAlternativa;
+
+  // Código AJAX para excluir a alternativa do banco de dados
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      // Verifica se a exclusão foi bem-sucedida
+      if (this.responseText === "Opção removida com sucesso!") {
+        // Alternativa removida com sucesso do banco de dados
+        optionListItem.parentNode.removeChild(optionListItem);
+      } else {
+        // Houve um erro ao excluir a opção
+        console.log("Erro ao remover a opção: " + this.responseText);
+      }
+    }
+  };
+
+  xhttp.open("POST", "../backend/excluir-alternativa.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("codigo_alternativa=" + codigoAlternativa);
+  
+  letterCounter--;
 }
 
 function convertToLetter(num) {
@@ -191,7 +179,6 @@ function convertToLetter(num) {
   var letter = String.fromCharCode(base + num);
   return letter;
 }
-
 
 function salvarOption(button, codigo_questao) {
   var optionForm = button.parentNode;
@@ -215,3 +202,6 @@ function salvarOption(button, codigo_questao) {
   button.classList.add("botao-desabilitado");
 }
 
+function generateUniqueId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
