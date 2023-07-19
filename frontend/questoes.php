@@ -116,32 +116,62 @@
         //   console.log("teste");
         // });
 
+        // Verifica se existem dados armazenados no localStorage
+        $(document).ready(function() {
+        // Verifica se existem dados armazenados no localStorage
+        if (localStorage.getItem('questoes')) {
+          // Recupera os dados das questões
+          const questoes = JSON.parse(localStorage.getItem('questoes'));
+
+          // Percorre as questões e adiciona ao formulário
+          questoes.forEach((questao) => {
+            addQuestion(questao.codigo_questao, questao.nome_questao);
+          });
+        }
+      });
 
         $("#btn-criar-questao").click(
             function() {
                 // alert("Teste");
                 $("#resultado").text("");
-                var questao = $("#input-new-questao").val();
-                var codigo_formulario = $("#codigo-formulario").val();
-                $.ajax({
-                    method: "POST",
-                    url: "../backend/registro-questao.php",
-                    data: { 
-                        'input-new-questao': questao,
-                        'codigo-formulario': codigo_formulario,
-                    }
-                }).done(
-                  function(codigo_questao) {
+                var novaQuestao = $("#input-new-questao").val();
+                var codigoFormulario = $("#codigo-formulario").val();
 
-                    if (codigo_questao > 0) {
-                      $("#mensagem").fadeIn();
-                        // Após 3 segundos, esconde a mensagem com efeito de fade-out
-                        setTimeout(function() {
-                            $("#mensagem").fadeOut();
-                        }, 3000);
-                         
-                    }
-                    addQuestion(codigo_questao, questao);
+                $.ajax({
+                  method: "POST",
+                  url: "../backend/registro-questao.php",
+                  data: {
+                    'input-new-questao': novaQuestao,
+                    'codigo-formulario': codigoFormulario,
+                  }
+                }).done(function(codigoQuestao) {
+                  if (codigoQuestao > 0) {
+                    $("#mensagem").fadeIn();
+                    setTimeout(function() {
+                      $("#mensagem").fadeOut();
+                    }, 3000);
+                  }
+                  addQuestion(codigoQuestao, novaQuestao);
+
+                  // Armazena os dados das questões no localStorage
+                  const questaoData = {
+                    codigo_questao: codigoQuestao,
+                    nome_questao: novaQuestao,
+                  };
+
+                  if (localStorage.getItem('questoes')) {
+                    // Recupera os dados existentes
+                    const questoes = JSON.parse(localStorage.getItem('questoes'));
+                    // Adiciona a nova questão aos dados existentes
+                    questoes.push(questaoData);
+                    // Atualiza os dados no localStorage
+                    localStorage.setItem('questoes', JSON.stringify(questoes));
+                  } else {
+                    // Cria um novo array de questões e adiciona a primeira questão
+                    const questoes = [questaoData];
+                    // Armazena os dados no localStorage
+                    localStorage.setItem('questoes', JSON.stringify(questoes));
+                  }
                   }
                   
                 );
