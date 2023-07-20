@@ -143,9 +143,63 @@ function addOption(button, codigo_questao) {
 }
 
 function removeQuestion(button, codigo_questao, nome_questao) {
+
+  removeQuestionFromLocalStorage(codigo_questao);
+
+    // Código AJAX para remover a questão do banco de dados
+    $.ajax({
+        method: "POST",
+        url: "../backend/excluir_questao.php",
+        data: { codigo_questao: codigo_questao }
+    }).done(function (resposta) {
+        // Verifica a resposta do servidor
+        console.log(resposta); // Você pode exibir a resposta ou tomar outras ações
+    });
+
   var questionDiv = button.parentNode;
   questionDiv.parentNode.removeChild(questionDiv);
   renumberQuestions(codigo_questao, nome_questao);
+}
+
+function addQuestionToLocalStorage(codigo_questao, nome_questao) {
+  // Verifica se existem dados armazenados no localStorage
+  if (localStorage.getItem('questoes')) {
+      // Recupera os dados das questões
+      const questoes = JSON.parse(localStorage.getItem('questoes'));
+
+      // Adiciona a nova questão aos dados existentes
+      questoes.push({
+          codigo_questao: codigo_questao,
+          nome_questao: nome_questao
+      });
+
+      // Atualiza os dados no localStorage
+      localStorage.setItem('questoes', JSON.stringify(questoes));
+  } else {
+      // Cria um novo array de questões e adiciona a primeira questão
+      const questoes = [{
+          codigo_questao: codigo_questao,
+          nome_questao: nome_questao
+      }];
+
+      // Armazena os dados no localStorage
+      localStorage.setItem('questoes', JSON.stringify(questoes));
+  }
+}
+
+// Função para remover uma questão do localStorage
+function removeQuestionFromLocalStorage(codigo_questao) {
+  // Verifica se existem dados armazenados no localStorage
+  if (localStorage.getItem('questoes')) {
+      // Recupera os dados das questões
+      const questoes = JSON.parse(localStorage.getItem('questoes'));
+
+      // Filtra as questões, removendo a que possui o código_questao correspondente
+      const updatedQuestoes = questoes.filter((questao) => questao.codigo_questao !== codigo_questao);
+
+      // Atualiza os dados no localStorage com as questões atualizadas
+      localStorage.setItem('questoes', JSON.stringify(updatedQuestoes));
+  }
 }
 
 function removeOption(button) {
