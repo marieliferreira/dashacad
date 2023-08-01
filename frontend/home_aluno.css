@@ -1,0 +1,11 @@
+
+.menu-aluno{
+    position: relative;
+    top: 100px;
+    height: 200px;
+    width: 180px;
+    margin: 20px;
+    border-radius: 5px 5px 0px 0px;
+    background: rgba(2, 61, 84, 0.85);
+    color: white;
+}
