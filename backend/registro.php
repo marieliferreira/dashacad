@@ -8,7 +8,7 @@
       $email = $_POST['input-email-institucional'];
       $senha = $_POST['input-senha-registro'];
       $valorRadio = $_POST['radio-tipo-usuario'];
-      $ra = $_POST['ra'];
+      $turma = $_POST['select-turma'];
 
 
      $uploadDir = "../imagens-upload/";
@@ -27,9 +27,10 @@
       
       // Insere os dados no banco de dados
       //$sql = "INSERT INTO tbl_usuario (USU_NOME, USU_EMAIL, USU_SENHA, USU_FOTO, USU_TIPO) VALUES ('$nome', '$email', '$senha', '$caminhoImagem', '$valorRadio')";
+      
 
       if ($valorRadio == 'aluno'){
-        $sql = "INSERT INTO tbl_usuario(USU_NOME, USU_EMAIL, USU_RA, USU_SENHA, USU_FOTO, USU_TIPO) VALUES ('$nome', '$email', '$ra', '$senha', '$caminhoImagem', 'Aluno')";
+        $sql = "INSERT INTO tbl_usuario(USU_NOME, USU_EMAIL, USU_SENHA, USU_FOTO, USU_TIPO, TUR_SERIE) VALUES ('$nome', '$email', '$senha', '$caminhoImagem', 'Aluno', '$turma')";
       } else {
         $sql = "INSERT INTO tbl_usuario (USU_NOME, USU_EMAIL, USU_SENHA, USU_FOTO, USU_TIPO) VALUES ('$nome', '$email', '$senha', '$caminhoImagem', 'Professor')";
       }

@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <title>DashAcad</title>
 </head>
-<body>
+<body> 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+        crossorigin="anonymous">
+    </script>
+
+    <script src="script.js" ></script>
 
     <div id="fundo">
         <div class="cabecalho-branco"></div>
@@ -72,11 +78,12 @@
                 <div class="box-usuario">
                     <h3 id="tipo-usuario">Tipo de usuário</h3>
                     <p>
-                        <input id="radio-aluno" type="radio" name="radio-tipo-usuario" value = "aluno" onclick="exibirCampoRA()">
+                        <input id="radio-aluno" type="radio" name="radio-tipo-usuario" value = "aluno" onclick="exibirCampoTurma()">
                         <label id="lbl-aluno" for="">Aluno</label>
-                        <div id="div-ra" style="display:none">
-                            <label id="lbl-ra" for="ra">RA:</label>
-                            <input type="text" id="ra" name="ra"><br>
+                        <div id="div-turma" style="display:none">
+                            <label id="lbl-turma" for="select-turma">Turma:</label>
+                            <select name="select-turma" id="select-turma">Turma</select>
+                            
                         </div>
                     </p>
                 
@@ -99,4 +106,31 @@
 </body>
 </html>
 
-<script src="script.js" ></script>
+<script>
+$(document).ready(function() {
+      // chama a função ao carregar a página
+      preencheSelectTurma();
+    });
+
+function preencheSelectTurma() {
+    // faz uma solicitação AJAX para o arquivo PHP
+    $.ajax({
+      url: '../backend/consulta-turma.php',
+      type: 'POST',
+      dataType: 'json',
+      success: function(data) {
+        // adiciona cada turma como uma opção no campo select
+        for (var i = 0; i < data.length; i++) {
+          $('#select-turma').append($('<option>', {
+            value: data[i].TUR_CODIGO,
+            text: data[i].TUR_SERIE
+          }));
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+    });
+  }
+</script>
+

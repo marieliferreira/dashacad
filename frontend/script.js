@@ -11,15 +11,15 @@ function readImage() {
 document.getElementById("img-input").addEventListener("change", readImage, false);
 
 
-function exibirCampoRA() {
+function exibirCampoTurma() {
     // Obtém o elemento de campo de entrada RA
-    var campoRA = document.getElementById("div-ra");
+    var campoTurma = document.getElementById("div-turma");
 
     // Exibe o campo de entrada se o botão de opção "Aluno" estiver selecionado
     if (document.getElementById("radio-aluno").checked) {
-        campoRA.style.display = "block";
+        campoTurma.style.display = "block";
     } else {
-        campoRA.style.display = "none";
+        campoTurma.style.display = "none";
     }
 }
 
