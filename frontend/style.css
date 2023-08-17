@@ -1022,8 +1022,64 @@ color: #00000068;
     font-size: 12px;
 }
 
+#icone-form{
+    margin: 30px 0px 30px 0px;
+    width: 316px;
+}
 
+#h4-formulario{
+    width: 316px;
+}
 
+.fa-check-square{
+    margin: 30px 0px 30px 0px;
+    width: 316px;
+    font-size: 60px;
+}
+
+#h4-respondidos{
+    width: 316px;
+}
+
+#h4-notas-parciais{
+    width: 316px;
+}
+
+.fa-graduation-cap{
+    margin: 30px 0px 30px 0px;
+    width: 316px;
+    font-size: 60px;
+}
+
+#h4-agenda{
+    width: 316px;
+}
+
+.fa-calendar{
+    margin: 30px 0px 30px 0px;
+    width: 316px;
+    font-size: 60px;
+}
+
+#h4-disciplinas{
+    width: 316px;
+}
+
+.fa-book{
+    margin: 30px 0px 30px 0px;
+    width: 316px;
+    font-size: 60px;
+}
+
+#h4-perfil{
+    width: 316px;
+}
+
+.fa-user{
+    margin: 30px 0px 30px 0px;
+    width: 316px;
+    font-size: 60px;
+}
 
 
   

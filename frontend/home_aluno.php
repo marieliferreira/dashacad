@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="home_aluno.css">
     <title>DashAcad</title>
@@ -65,21 +66,25 @@
       <div class="container-sm">
         <div class="row align-items-start" >
           <div class="menu-aluno col" id="menu-aluno-formulario" >
-            <h4>Formulários</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-file-earmark-text text-center" viewBox="0 0 16 16" id="icone-form">
+          <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+          <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+          </svg>
+            <h4 class="text-center" id="h4-formulario">Formulários</h4>
             <div>
-            <a href="">Acessar</a>
+            <a href="../frontend/exibe_formulario_aluno.php">Acessar</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-respondidos" >
-            <img src="" alt="">
-            <h4>Respondidos</h4>
+            <i class="fas fa-check-square text-center"></i>
+            <h4 class="text-center" id="h4-respondidos">Respondidos</h4>
             <div>
             <a href="">Acessar</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-nparciais" >
-            <img src="" alt="">
-            <h4>Notas Parciais</h4>
+          <i class="fas fa-graduation-cap text-center"></i>
+            <h4 class="text-center" id="h4-notas-parciais">Notas Parciais</h4>
             <div>
             <a href="">Acessar</a>
             </div>
@@ -87,22 +92,22 @@
         </div>
         <div class="row align-items-start" >
           <div class="menu-aluno col" id="menu-aluno-formulario" >
-            <img src="" alt="">
-            <h4>Agenda</h4>
+          <i class="fas fa-calendar text-center"></i>
+            <h4 class="text-center" id="h4-agenda">Agenda</h4>
             <div>
             <a href="">Acessar</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-respondidos" >
-            <img src="" alt="">
-            <h4>Disciplinas</h4>
+            <i class="fas fa-book text-center"></i>
+            <h4 class="text-center" id="h4-disciplinas">Disciplinas</h4>
             <div>
             <a href="">Acessar</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-nparciais" >
-            <img src="" alt="">
-            <h4>Perfil</h4>
+            <i class="fas fa-user text-center"></i>
+            <h4 class="text-center" id="h4-perfil">Perfil</h4>
             <div>
             <a href="">Acessar</a>
             </div>
