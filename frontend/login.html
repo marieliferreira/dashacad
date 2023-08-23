@@ -88,9 +88,11 @@
         }).done(function(resposta) {
             console.log(resposta);
 
-            if (resposta == 'Ok') {
-                window.location = "../frontend/home.php";
-            } else {
+            if (resposta === 'Aluno') {
+                window.location = "../frontend/home_aluno.php"; // Redirect to student page
+            } else if (resposta === 'Professor') {
+                window.location = "../frontend/home.php"; // Redirect to teacher page
+            }  else {
                 $("#login_error").text(resposta);
             }
         });

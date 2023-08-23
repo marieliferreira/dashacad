@@ -31,8 +31,14 @@ if(isset($_POST['input-email']) || isset($_POST['input-senha'])){
             $_SESSION['foto'] = $usuario['USU_FOTO'];
 
 
-            //header("Location: ../frontend/home.html");
-            echo "Ok";
+            $tipo = $usuario['USU_TIPO'];
+
+
+            if ($tipo == 'Aluno') {
+                echo "Aluno"; // Custom value for student role
+            } else if ($tipo == 'Professor') {
+                echo "Professor"; // Custom value for teacher role
+            } 
 
         } else {
             echo "Falha ao logar! E-mail ou senha incorretos.";

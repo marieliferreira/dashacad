@@ -108,7 +108,7 @@
                 }
             
                 
-                echo "<td> <a class='fa fa-plus btn-adicionar' href='questoes.php?codigo=" . urlencode($row["FOR_CODIGO"]) . "&titulo=" . urlencode($row["FOR_TITULO"]) . "&descricao=" . urlencode($row["FOR_DESCRICAO"]) . "'></a></td>";
+                echo "<td> <a class='fa fa-plus btn-adicionar' href='formulario-aluno.php?codigo=" . urlencode($row["FOR_CODIGO"]) . "&titulo=" . urlencode($row["FOR_TITULO"]) . "&descricao=" . urlencode($row["FOR_DESCRICAO"]) . "'></a></td>";
                 echo "<td> <a href='' class= 'far fa-edit btn-editar'></a></td>";
                 echo "<td> <a href='' class= 'fas fa-trash btn-excluir'></a></td>";
                 echo "</tr>";
