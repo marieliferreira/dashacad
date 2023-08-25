@@ -120,10 +120,14 @@ function addOption(button, codigo_questao) {
   
   var removeOptionButton = document.createElement("button");
   removeOptionButton.className = "remove-option-btn";
+  removeOptionButton.id = "id-remove-option-btn";
   removeOptionButton.type = "button";
   removeOptionButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
   removeOptionButton.onclick = function() {
-    removeOption(this);
+    console.log (removeOptionButton);
+
+    var codigo_alternativa = removeOptionButton.value;
+    removeOption(this, codigo_questao, codigo_alternativa);
   };
 
   optionListItem.className = "option-container";
@@ -202,9 +206,10 @@ function removeQuestionFromLocalStorage(codigo_questao) {
   }
 }
 
-function removeOption(button) {
+function removeOption(button, codigo_questao, codigo_alternativa) {
+
   var optionListItem = button.parentNode;
-  var codigoAlternativa = optionListItem.dataset.codigoAlternativa;
+  //var codigoAlternativa = optionListItem.dataset.codigoAlternativa;
 
   // Código AJAX para excluir a alternativa do banco de dados
   var xhttp = new XMLHttpRequest();
@@ -223,7 +228,7 @@ function removeOption(button) {
 
   xhttp.open("POST", "../backend/excluir-alternativa.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("codigo_alternativa=" + codigoAlternativa);
+  xhttp.send("codigo_alternativa=" + codigo_alternativa);
   
   letterCounter--;
 }
@@ -246,6 +251,13 @@ function salvarOption(button, codigo_questao) {
     if (this.readyState == 4 && this.status == 200) {
       var spanSalvo = optionForm.querySelector("#span-salvo");
       spanSalvo.style.color = "green";
+      
+      //console.log(this.responseText);
+
+      var spanExclusao = optionForm.querySelector("#id-remove-option-btn");
+      spanExclusao.value = this.responseText;
+      //console.log(spanExclusao);
+
     }
   };
   xhttp.open("POST", "../backend/registro_alternativa.php", true);

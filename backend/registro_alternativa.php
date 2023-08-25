@@ -59,8 +59,10 @@
         
 
         if (mysqli_query($mysqli,$consulta) === TRUE) {
-           // echo mysqli_insert_id($mysqli);
-            echo "Ok"; 
+            $codigo_alternativa = mysqli_insert_id($mysqli);
+            //echo "<script>console.log('$codigo');</script>";
+            //echo mysqli_insert_id($mysqli);
+            echo $codigo_alternativa; 
           
           //echo "questoes.php?codigo=" . $row["FOR_CODIGO"] . "&titulo=" . urlencode($row["FOR_TITULO"]) . "&descricao=" . urlencode($row["FOR_DESCRICAO"]);
         } else {
