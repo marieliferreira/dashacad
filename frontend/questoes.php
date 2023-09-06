@@ -86,21 +86,6 @@
       </form>
     
 
-
-      <form>
-        <div id="div-new-alternativa">
-            <h6 for="">Nova pergunta:</h6>
-            <input type="text" id="input-new-alternativa" name="input-new-lternativa">
-            <input type="hidden" id="codigo-questao" name="codigo-questao" value=<?php echo $codigo_questao;?>>
-            <!-- <a href="#" class= "btn btn-dark d-block" onclick="addQuestion()" id="btn-criar-questao">Criar</a> -->
-            <a href="#" class= "btn btn-dark d-block" id="btn-salvar-opcao">Salvar Opção</a>
-
-            <!-- <div id="mensagem" ></div> -->
-          </div>
-      </form>
-
-
-
       <span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home.php"></a></span>
       
 
@@ -143,15 +128,19 @@
             addQuestion(questao.codigo_questao, questao.nome_questao);
           });
         }
+      });
 
+      $(document).ready(function() {
+        // Verifica se existem dados armazenados no localStorage
         if (localStorage.getItem('alternativas')) {
+          // Recupera os dados das questões
           const alternativas = JSON.parse(localStorage.getItem('alternativas'));
-          alternativas.forEach((alternativa) => {
-            // Chame a função para adicionar alternativas à interface
-            addOption(alternativa.codigo_alternativa, alternativa.descricao_alternativa);
-        });
-    }
 
+          // Percorre as questões e adiciona ao formulário
+          alternativas.forEach((alternativa) => {
+            addOption(alternativa.codigo_alternativa, alternativa.nome_alternativa);
+          });
+        }
       });
 
         $("#btn-criar-questao").click(
@@ -206,43 +195,43 @@
             function() {
                 // alert("Teste");
                 $("#resultado").text("");
-                var novaAlternativa = $("#input-new-questao").val();
-                var codigoQuestao = $("#codigo-questao").val();
+                var novaAlternativa = $("#option-text").val();
+                var codigoAlternativa = $("#option-hidden").val();
 
                 $.ajax({
                   method: "POST",
                   url: "../backend/registro_alternativa.php",
                   data: {
-                    'input-new-alternativa': novaAlternativa,
-                    'codigo-questao': codigoQuestao,
+                    'option-text': novaAlternativa,
+                    'option-hidden': codigoAlternativa,
                   }
-                }).done(function(codigo_alternativa) {
-                  if (codigo_alternativa > 0) {
+                }).done(function(codigoAlternativa) {
+                  if (codigoAlternativa > 0) {
                     $("#mensagem").fadeIn();
                     setTimeout(function() {
                       $("#mensagem").fadeOut();
                     }, 3000);
                   }
-                  addOption(codigo_alternativa, novaAlternativa);
+                  addOption(codigoAlternativa, novaAlternativa);
 
                   // Armazena os dados das questões no localStorage
-                  const questaoData = {
-                    codigo_questao: codigoQuestao,
-                    nome_questao: novaQuestao,
+                  const alternativaData = {
+                    codigo_alternativa: codigoAlternativa,
+                    nome_alternativa: novaAlternativa,
                   };
 
-                  if (localStorage.getItem('questoes')) {
+                  if (localStorage.getItem('alternativas')) {
                     // Recupera os dados existentes
-                    const questoes = JSON.parse(localStorage.getItem('questoes'));
+                    const alternativas = JSON.parse(localStorage.getItem('alternativas'));
                     // Adiciona a nova questão aos dados existentes
-                    questoes.push(questaoData);
+                    questoes.push(alternativaData);
                     // Atualiza os dados no localStorage
-                    localStorage.setItem('questoes', JSON.stringify(questoes));
+                    localStorage.setItem('alternativas', JSON.stringify(alternativas));
                   } else {
                     // Cria um novo array de questões e adiciona a primeira questão
-                    const questoes = [questaoData];
+                    const alternativas = [alternativaData];
                     // Armazena os dados no localStorage
-                    localStorage.setItem('questoes', JSON.stringify(questoes));
+                    localStorage.setItem('alternativas', JSON.stringify(alternativas));
                   }
                   }
                   

@@ -1,9 +1,6 @@
 var questionCount = 1; // Variável para controlar o número da pergunta
 var letterCounter = 0;
 
-
-
-
 function addQuestion(codigo_questao, nome_questao) {
   var questionsForm = document.getElementById("questions-form");
 
@@ -194,6 +191,32 @@ function addQuestionToLocalStorage(codigo_questao, nome_questao) {
   }
 }
 
+function addAlternativaToLocalStorage(codigo_alternativa, optionText) {
+  // Verifica se existem dados armazenados no localStorage
+  if (localStorage.getItem('alternativas')) {
+
+      const alternativas = JSON.parse(localStorage.getItem('alternativas'));
+
+      alternativas.push({
+          codigo_alternativa: codigo_alternativa,
+          descricao_alternativa: optionText
+      });
+
+      // Atualiza os dados no localStorage
+      localStorage.setItem('alternativas', JSON.stringify(alternativas));
+  } else {
+
+      const alternativas = [{
+        codigo_alternativa: codigo_alternativa,
+        descricao_alternativa: optionText
+      }];
+
+      // Armazena os dados no localStorage
+      localStorage.setItem('alternativas', JSON.stringify(alternativas));
+  }
+}
+
+
 // Função para remover uma questão do localStorage
 function removeQuestionFromLocalStorage(codigo_questao) {
   // Verifica se existem dados armazenados no localStorage
@@ -228,32 +251,6 @@ function removeOption(button, codigo_questao, codigo_alternativa) {
       }
     }
   };
-
-  function addAlternativaToLocalStorage(codigo_alternativa, optionText) {
-    // Verifica se existem dados armazenados no localStorage
-    if (localStorage.getItem('alternativas')) {
-
-        const alternativas = JSON.parse(localStorage.getItem('alternativas'));
-  
-        alternativas.push({
-            codigo_alternativa: codigo_alternativa,
-            descricao_alternativa: optionText
-        });
-  
-        // Atualiza os dados no localStorage
-        localStorage.setItem('alternativas', JSON.stringify(alternativas));
-    } else {
-        
-        const alternativas = [{
-          codigo_alternativa: codigo_alternativa,
-          descricao_alternativa: optionText
-        }];
-  
-        // Armazena os dados no localStorage
-        localStorage.setItem('alternativas', JSON.stringify(alternativas));
-    }
-  }
-  
 
   xhttp.open("POST", "../backend/excluir-alternativa.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
