@@ -42,6 +42,9 @@
     </div>
 
     <?php
+
+      include("../backend/conexao.php");
+      
       // Verifica se o parâmetro "codigo" foi fornecido na URL
       if (isset($_GET['codigo'])) {
           $codigo = $_GET['codigo'];
@@ -56,8 +59,13 @@
           }
       }
 
-       // Salva a questão no banco de dados
+      // 1. Consulta SQL para buscar questões e alternativas
+      $query = "SELECT q.QUE_CODIGO AS questao_id, q.QUE_DESCRICAO AS questao_texto, a.ALT_CODIGO AS alternativa_id, a.ALT_DESCRICAO AS alternativa_texto 
+      FROM tbl_questao q 
+      LEFT JOIN tbl_alternativas a ON q.QUE_CODIGO = a.QUE_CODIGO";
+      
 
+      $result = $mysqli->query($query);
 
       ?>
 
@@ -72,6 +80,36 @@
     </div>
     
       <div id="resultado" ></div>
+
+
+
+      <div id="questions-form">
+        <form action="../backend/salvar_respostas.php" id="form-questao" method="POST"> <!-- Substitua "processar_respostas.php" pelo script que processará as respostas -->
+        <input type="hidden" id = "codigo_formulario" name = "codigo_formulario" value = "<?php echo $_GET['codigo']; ?>">
+            <?php
+            if ($result) {
+                $current_question_id = null;
+                while ($row = $result->fetch_assoc()) {
+                    if ($current_question_id !== $row['questao_id']) {
+                        if ($current_question_id !== null) {
+                            echo '</div>'; // Fecha a div da questão anterior
+                        }
+                        echo '<div id="div-questao">';
+                        echo '<p id="p-questao">' . $row['questao_texto'] . '</p>';
+                        $current_question_id = $row['questao_id'];
+                    }
+                    echo '<label id=lbl-alt>';
+                    echo '<input type="radio" name="questao_' . $row['questao_id'] . '" value="' . $row['alternativa_id'] . '">';
+                    echo $row['alternativa_texto'];
+                    echo '</label><br>';
+                }
+                echo '</div>'; // Fecha a div da última questão
+            }
+            ?>
+            <input type="submit" value="Enviar Respostas">
+        </form>
+    </div>
+
 
       
     
@@ -92,118 +130,13 @@
     crossorigin="anonymous">
     </script>
 
-    <!--<script>
-      $(document).ready(function() {
-        $(".add-option-btn").click(function() {
-            var questaoId = $(this).data('atividade-id');
-            $('#atividadeId-edicao').val(atividadeId);
-        });
-      });
-    </script>-->
-
-    <script>
-        // $(document).ready(function() {
-        //   console.log("teste");
-        // });
-
-        // Verifica se existem dados armazenados no localStorage
-        $(document).ready(function() {
-        // Verifica se existem dados armazenados no localStorage
-        if (localStorage.getItem('questoes')) {
-          // Recupera os dados das questões
-          const questoes = JSON.parse(localStorage.getItem('questoes'));
-
-          // Percorre as questões e adiciona ao formulário
-          questoes.forEach((questao) => {
-            addQuestion(questao.codigo_questao, questao.nome_questao);
-          });
-        }
-      });
-
-        $("#btn-criar-questao").click(
-            function() {
-                // alert("Teste");
-                $("#resultado").text("");
-                var novaQuestao = $("#input-new-questao").val();
-                var codigoFormulario = $("#codigo-formulario").val();
-
-                $.ajax({
-                  method: "POST",
-                  url: "../backend/registro-questao.php",
-                  data: {
-                    'input-new-questao': novaQuestao,
-                    'codigo-formulario': codigoFormulario,
-                  }
-                }).done(function(codigoQuestao) {
-                  if (codigoQuestao > 0) {
-                    $("#mensagem").fadeIn();
-                    setTimeout(function() {
-                      $("#mensagem").fadeOut();
-                    }, 3000);
-                  }
-                  addQuestion(codigoQuestao, novaQuestao);
-
-                  // Armazena os dados das questões no localStorage
-                  const questaoData = {
-                    codigo_questao: codigoQuestao,
-                    nome_questao: novaQuestao,
-                  };
-
-                  if (localStorage.getItem('questoes')) {
-                    // Recupera os dados existentes
-                    const questoes = JSON.parse(localStorage.getItem('questoes'));
-                    // Adiciona a nova questão aos dados existentes
-                    questoes.push(questaoData);
-                    // Atualiza os dados no localStorage
-                    localStorage.setItem('questoes', JSON.stringify(questoes));
-                  } else {
-                    // Cria um novo array de questões e adiciona a primeira questão
-                    const questoes = [questaoData];
-                    // Armazena os dados no localStorage
-                    localStorage.setItem('questoes', JSON.stringify(questoes));
-                  }
-                  }
-                  
-                );
-            }
-        );
-              
-    </script>
-<!--<script>
-        // $(document).ready(function() {
-        //   console.log("teste");
-        // });
-
-    $("#id-btn-salvar-opcao").click(function() {
-      $("#resultado").text("");
-      var descricao_alternativa = $("#option-text").val();
-      var questao_codigo = $("#option-hidden").val();
-      var checkbox = $("#option-checkbox").val();
-    
-    $.ajax({
-        method: "POST",
-        url: "../backend/registro_alternativa.php",
-        data: { 
-            'option-text': descricao_alternativa,
-            'option-hidden': questao_codigo,
-            'option-checkbox': checkbox
-        }
-    }).done(function(resposta,codigo_alternativa) {
-            console.log(codigo_alternativa);
-
-            if (resposta == 'Ok') {
-                window.location = "../frontend/home.php";
-            } else {
-                $("#login_error").text(resposta);
-            }
-        });
-    });
-              
-    </script>-->
-
-
 
 </body>
 </html>
+
+<?php
+  $result->close();
+  $mysqli->close();
+?>
 
 <script src="form.js"></script>

@@ -317,6 +317,11 @@ td{
   color: #767676;
 }
 
+.btn-responder{
+  color:  #767676;
+  margin-right: 10px;
+}
+
 #h4-form{
   position: absolute;
   width: 400px;
@@ -505,4 +510,14 @@ td{
 .botao-desabilitado {
   opacity: 0.5; /* Define a opacidade do botão para 50% */
   pointer-events: none; /* Impede eventos de clique no botão */
+}
+
+#form-questao{
+  position: absolute;
+  top: 300px;
+  left: 300px;
+  background-color: #FFFFFF;
+  width: 800px;
+  padding: 20px;
+  border-radius: 10px;
 }

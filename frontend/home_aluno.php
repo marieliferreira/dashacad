@@ -95,7 +95,7 @@
           <i class="fas fa-calendar text-center"></i>
             <h4 class="text-center" id="h4-agenda">Agenda</h4>
             <div>
-            <a href="">Acessar</a>
+            <a href="https://workspace.google.com/intl/pt-BR/products/calendar/" target="_blank">Acessar</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-respondidos" >
