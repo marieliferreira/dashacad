@@ -86,27 +86,45 @@
       <div id="questions-form">
         <form action="../backend/salvar_respostas.php" id="form-questao" method="POST"> <!-- Substitua "processar_respostas.php" pelo script que processará as respostas -->
         <input type="hidden" id = "codigo_formulario" name = "codigo_formulario" value = "<?php echo $_GET['codigo']; ?>">
-            <?php
-            if ($result) {
-                $current_question_id = null;
-                while ($row = $result->fetch_assoc()) {
-                    if ($current_question_id !== $row['questao_id']) {
-                        if ($current_question_id !== null) {
-                            echo '</div>'; // Fecha a div da questão anterior
+        <?php
+                if ($result) {
+                    $questions = []; // Crie um array para armazenar as questões
+                    $current_question_number = 0; // Inicialize o número da questão
+                    while ($row = $result->fetch_assoc()) {
+                        $question_id = $row['questao_id'];
+                        if (!isset($questions[$question_id])) {
+                            // Se a questão ainda não estiver no array, crie-a
+                            $current_question_number++; // Incrementa o número da questão
+                            $questions[$question_id] = [
+                                'questao_texto' => $row['questao_texto'],
+                                'alternativas' => [],
+                                'numero' => $current_question_number, // Armazena o número da questão
+                            ];
                         }
-                        echo '<div id="div-questao">';
-                        echo '<p id="p-questao">' . $row['questao_texto'] . '</p>';
-                        $current_question_id = $row['questao_id'];
+                        // Adicione a alternativa à questão correspondente
+                        $questions[$question_id]['alternativas'][] = [
+                            'alternativa_id' => $row['alternativa_id'],
+                            'alternativa_texto' => $row['alternativa_texto'],
+                        ];
                     }
-                    echo '<label id=lbl-alt>';
-                    echo '<input type="radio" name="questao_' . $row['questao_id'] . '" value="' . $row['alternativa_id'] . '">';
-                    echo $row['alternativa_texto'];
-                    echo '</label><br>';
+
+                    foreach ($questions as $question_id => $question_data) {
+                        echo '<div id="div-questao">';
+                        echo '<p id="p-questao"><strong>Questão ' . $question_data['numero'] . ':</strong> ' . $question_data['questao_texto'] . '</p>';
+                        
+                        foreach ($question_data['alternativas'] as $alternativa) {
+                            echo '<label id=lbl-alt>';
+                            echo '<input type="radio" id="input-alt" name="questao_' . $question_id . '" value="' . $alternativa['alternativa_id'] . '">';
+                            echo $alternativa['alternativa_texto'];
+                            echo '</label><br>';
+                        }
+
+                        echo '</div>'; // Fecha a div da questão
+                    }
                 }
-                echo '</div>'; // Fecha a div da última questão
-            }
-            ?>
-            <input type="submit" value="Enviar Respostas">
+              ?>
+
+              <input type="submit" value="Enviar Respostas">
         </form>
     </div>
 
