@@ -182,5 +182,3 @@
   $result->close();
   $mysqli->close();
 ?>
-
-<script src="form.js"></script>
