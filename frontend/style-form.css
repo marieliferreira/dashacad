@@ -524,6 +524,7 @@ td{
   background: #FFFFFF;
   border-radius: 10px;
   padding: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -541,4 +542,13 @@ td{
 
 #input-alt{
   margin-right: 10px;
+}
+
+#botao-enviar-respostas{
+  color: #FFFFFF;
+  font-weight: bold;
+  background-color: #023D54;
+  border-color: #023D54;
+  border-radius: 5px;
+  padding: 10px;
 }

@@ -11,34 +11,56 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>DashAcad</title>
 </head>
+<?php
+
+    session_start();
+    
+    if(!isset($_SESSION['nome'])){
+      echo "<script>window.location.href = 'login.html'; </script>";
+    }
+    else{
+      $codigo_usuario = $_SESSION['codigo-usuario'];
+      $nome_usuario = $_SESSION['nome'];
+      $email_usuario = $_SESSION['email'];
+      $foto_usuario = $_SESSION['foto'];
+    }
+
+    if(isset($_POST['botao-logout'])){
+      session_destroy();
+      header("Location: login.html");
+  }
+		
+
+?>
 <body>
     <div class="cabecalho-branco-home">
 
 
         <div class="container-fluid">
-            <div class="row">
+            <div class="row col-md-12">
               <div class="col-sm-4">
                 <div class="row">
-                  <div class="col-sm-4">
-                    <img src="imagens/foto.png" alt="Foto do perfil" class="img-fluid rounded-circle">
+                  <div class="col-sm-4 div-foto-perfil">
+                    <img src = <?php echo "'" . $foto_usuario . "'";?> alt="Foto do perfil" class="img-fluid rounded-circle" >
                   </div>
-                  <div class="col-sm-8">
-                    <h6 id="nome-usuario">Nome do usuário</h6>
-                    <p id="email-usuario">emaildousuário@gmail</p>
-                  </div>
+                    <div class="col-sm-8">
+                      <h6 id="nome-usuario"><?php echo $nome_usuario;?></h6>
+                      <p id="email-usuario"><?php echo $email_usuario;?></p>
+                    </div>
                 </div>
               </div>
               <div class="col-sm-4 text-center">
                 <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" class="img-fluid">
               </div>
-              <div class="col-sm-4 text-right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"      class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+              <div class="col-sm-4 text-right botao-logout">
+                    <a href="login.html"><svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor"      class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                      <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></a>
                 </svg>
               </div>
             </div>
-          </div>      
+          </div>
+          
     </div>
 
     <?php
@@ -62,7 +84,7 @@
       // 1. Consulta SQL para buscar questões e alternativas
       $query = "SELECT q.QUE_CODIGO AS questao_id, q.QUE_DESCRICAO AS questao_texto, a.ALT_CODIGO AS alternativa_id, a.ALT_DESCRICAO AS alternativa_texto 
       FROM tbl_questao q 
-      LEFT JOIN tbl_alternativas a ON q.QUE_CODIGO = a.QUE_CODIGO";
+      LEFT JOIN tbl_alternativas a ON q.QUE_CODIGO = a.QUE_CODIGO WHERE q.FOR_CODIGO = '$codigo'";
       
 
       $result = $mysqli->query($query);
@@ -81,11 +103,15 @@
     
       <div id="resultado" ></div>
 
+      <div id="resultado-nota" class="card-body">
+           <!-- Aqui serão exibid os os resultados da nota e da quantidade de questões certas -->
+      </div>
+
 
 
       <div id="questions-form">
         <form action="../backend/salvar_respostas.php" id="form-questao" method="POST"> <!-- Substitua "processar_respostas.php" pelo script que processará as respostas -->
-        <input type="hidden" id = "codigo_formulario" name = "codigo_formulario" value = "<?php echo $_GET['codigo']; ?>">
+        <input type="hidden" id = "codigo_formulario" name = "codigo_formulario" value = "<?php echo $codigo ?>">
         <?php
                 if ($result) {
                     $questions = []; // Crie um array para armazenar as questões
@@ -124,7 +150,7 @@
                 }
               ?>
 
-              <input type="submit" value="Enviar Respostas">
+              <input id="botao-enviar-respostas" type="submit" value="Enviar Respostas">
         </form>
     </div>
 
@@ -132,7 +158,7 @@
       
     
 
-      <span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home.php"></a></span>
+      <span ><a  class="fa fa-arrow-left" id="btn-voltar" href="exibe_formulario_aluno.php"></a></span>
       
 
      

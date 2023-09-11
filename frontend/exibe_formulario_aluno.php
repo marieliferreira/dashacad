@@ -64,7 +64,7 @@
             </div>
             
       </div>
-<span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home.php"></a></span>
+<span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home_aluno.php"></a></span>
 <div id="div-tbl">
 
     <h4 id="h4-form">Formulários</h1>

@@ -35,13 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    
-     // Aqui você pode adicionar o código do formulário associado
-     $codigo_formulario = $_GET['codigo_formulario']; // Supondo que você tenha um campo hidden no seu formulário para o código do formulário
-
      session_start(); // Certifique-se de chamar session_start() no início do seu script
 
-      // O usuário está logado, então podemos pegar o seu código
+    // O usuário está logado, então podemos pegar o seu código
    if (isset($_SESSION['codigo-usuario'])) {
     $usu_codigo = $_SESSION['codigo-usuario'];
     $consulta_usuario = "SELECT USU_CODIGO FROM tbl_usuario WHERE USU_CODIGO = '$usu_codigo'";
@@ -64,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $questao_id = $resposta['questao_id'];
                 $alternativa_id = $resposta['alternativa_id'];
                 $alternativa_descricao = $resposta['alternativa_descricao'];
+
+                 // O código do formulário agora é acessado corretamente usando $_POST
+                $codigo_formulario = $_POST['codigo_formulario'];
     
                 // Consulta SQL para inserir a resposta no banco de dados, incluindo o código do formulário
                 $query_inserir_resposta = "INSERT INTO tbl_resposta_aluno (QUE_CODIGO, ALT_CODIGO, ALT_DESCRICAO, FOR_CODIGO, USU_CODIGO_CAD, USU_CODIGO_ALT) VALUES ('$questao_id', '$alternativa_id', '$alternativa_descricao', '$codigo_formulario', '$usuario_codigo', '$usuario_codigo')";
@@ -75,14 +74,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "Erro ao inserir resposta: " . $mysqli->error;
                 }
             }
-        }
-    
 
-            // Redirecione o usuário após o processamento (por exemplo, para uma página de confirmação)
-            header("Location: confirmacao.php");
-        } else {
-            echo "Método de requisição inválido.";
+            // Agora, calcule a nota com base nas respostas
+            $nota_total = 0;
+
+            foreach ($respostas as $resposta) {
+                // Verifique se a alternativa escolhida pelo aluno está marcada como "correta" no banco de dados
+                $alternativa_id = $resposta['alternativa_id'];
+                $questao_id = $resposta['questao_id'];
+
+                $query_verificar_correta = "SELECT ALT_STATUS FROM tbl_alternativas WHERE ALT_CODIGO = '$alternativa_id' AND QUE_CODIGO = '$questao_id' AND ALT_STATUS = 'certo'";
+                $result_verificar_correta = $mysqli->query($query_verificar_correta);
+
+                if ($result_verificar_correta->num_rows > 0) {
+                    // Se a alternativa for correta, adicione pontos à nota total
+                    $nota_total += 1; // Pode ajustar essa lógica de acordo com o valor das questões
+                }
+            }
+
+            // Insira a nota total na tabela tbl_nota_formulario
+            $query_inserir_nota = "INSERT INTO tbl_nota_formulario (FOR_CODIGO, NFO_NOTA, USU_CODIGO_CAD, USU_CODIGO_ALT) VALUES ('$codigo_formulario', '$nota_total', '$usuario_codigo', '$usuario_codigo')";
+            $result_inserir_nota = $mysqli->query($query_inserir_nota);
+
+            if (!$result_inserir_nota) {
+                echo "Erro ao inserir nota: " . $mysqli->error;
+            }else{
+                // Exiba a nota e a quantidade de questões certas em um card body
+                echo '<div class="card">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">Resultados:</h5>';
+                echo '<p class="card-text">Nota: ' . $nota_total . '</p>';
+                echo '<p class="card-text">Questões certas: ' . $nota_total . ' de ' . count($respostas) . '</p>';
+                echo '</div>';
+                echo '</div>';
+            }
         }
+            
+    }
+    $mysqli->close();
+} else {
+    echo "Método de requisição inválido.";
 }
-$mysqli->close();
 ?>
