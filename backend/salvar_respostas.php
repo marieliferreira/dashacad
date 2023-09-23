@@ -1,10 +1,9 @@
 <?php
-include("../backend/conexao.php");
+include("conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Inicialize arrays para armazenar informações das respostas
     $respostas = [];
-
     // Iterar pelos campos do formulário (cada campo corresponde a uma resposta)
     foreach ($_POST as $key => $value) {
         // Verifique se o campo começa com "questao_" para identificar as respostas
@@ -99,14 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$result_inserir_nota) {
                 echo "Erro ao inserir nota: " . $mysqli->error;
             }else{
-                // Exiba a nota e a quantidade de questões certas em um card body
-                echo '<div class="card">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">Resultados:</h5>';
-                echo '<p class="card-text">Nota: ' . $nota_total . '</p>';
-                echo '<p class="card-text">Questões certas: ' . $nota_total . ' de ' . count($respostas) . '</p>';
-                echo '</div>';
-                echo '</div>';
+                echo '<h5 class="modal-title">Resultados:</h5>';
+                echo '<p>Nota:' .  $nota_total . '</p>';
+                echo '<p>Questões certas: ' . $nota_total . ' de ' .  count($respostas) . '</p>';
+                echo '<p>' . print_r ($resposta) . '</p>';
             }
         }
             
@@ -115,3 +110,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "Método de requisição inválido.";
 }
+?>
