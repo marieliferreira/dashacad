@@ -150,7 +150,7 @@ if (isset($_POST['botao-logout'])) {
     <!-- Modal para exibir os resultados -->
     <div class="modal fade" id="resultadoModal" tabindex="-1" role="dialog" aria-labelledby="resultadoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div id="modal-respostas" class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="resultadoModalLabel">Resultados:</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

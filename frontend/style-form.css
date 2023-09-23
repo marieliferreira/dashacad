@@ -303,6 +303,15 @@ td{
   text-decoration: none;
 }
 
+#btn-voltar-turma{
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  color: #767676;
+  font-size: 22px;
+  text-decoration: none;
+}
+
 .btn-adicionar{
   color: #767676;
   margin-right: 10px;
@@ -350,6 +359,20 @@ td{
   color: #023D54;
 }
 
+#h4-reg-turma{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 130px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
 #modal-registro-form{
   position: absolute;
   width: 800px;
@@ -362,10 +385,28 @@ td{
   padding: 100px 50px 100px 50px;
 }
 
+#modal-registro-turma{
+  position: absolute;
+  width: 500px;
+  height: 350px;
+  left: 420px;
+  top: 80px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px; 
+  padding: 80px 30px 40px 30px;
+}
+
 #div-registro-form{
   padding: 30px;
   border: 1px solid #000000;
   height: 370px;
+}
+
+#div-registro-turma{
+  padding: 30px;
+  border: 1px solid #000000;
+  height: 200px;
 }
 
 #titulo{
@@ -502,6 +543,18 @@ td{
     border-radius: 20px;
 }
 
+#btn-salvar-turma{
+  position: absolute;
+  color: #FFFFFF;
+  top: 290px;
+  left: 180px;
+  width: 147px;
+  height: 40px;
+  background: #023D54;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
 #span-salvo{
   margin-left: 10px;
   color: #7676767e;
@@ -551,4 +604,30 @@ td{
   border-color: #023D54;
   border-radius: 5px;
   padding: 10px;
+}
+
+#modal-respostas{
+  top: 40px;
+}
+
+#nome-turma{
+  font-size: 18px;
+}
+
+#p-turma{
+  font-size: 12px;
+  color: #969595;
+}
+
+#input-nome-turma{
+    box-sizing: border-box;
+    position: absolute;
+    font-size: 14px;
+    width: 380px;
+    height: 80px;
+    left: 60px;
+    top: 180px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+    padding: 10px;
 }

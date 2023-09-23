@@ -40,6 +40,8 @@ function exibirCadastrarTurma() {
         campoVisualizarTurma.style.display ="none";
         camposVisiveis = false;
     }
+
+    
 }
 
 function exibirCadastrarDisciplina() {
