@@ -117,26 +117,33 @@ if (isset($_POST['botao-logout'])) {
 
                 // Itera pelas questões e exibe-as
                 foreach ($questions as $question) {
-                    echo '<div class="question">';
-                    echo '<p class="question-number">' . 'Questão ' . $question['numero'] . '</p>';
-                    echo '<p class="question-text">' . $question['questao_texto'] . '</p>';
-                    echo '<div class="alternatives">';
+                    echo '<div id="div-questao">';
+                    echo '<p id="p-questao"><strong>Questão ' . $question['numero'] . ': </strong>' . $question['questao_texto'] . '</p>';
+                    
+                    
                     foreach ($question['alternativas'] as $alternative) {
-                        echo '<div class="alternative">';
-                        echo '<input type="radio" id="questao_' . $question['numero'] . '" name="questao_' . $question['numero'] . '" value="' . $alternative['alternativa_id'] . '">';
-                        echo '<label for="questao_' . $question['questao_codigo'] . '">' . $alternative['alternativa_texto'] . '</label>';
-                        echo '</div>';
+                        echo '<label id=lbl-alt>';
+                        echo '<input class = "input-alt" type="radio" id="questao_' . $question['numero'] . '" name="questao_' . $question['numero'] . '" value="' . $alternative['alternativa_id'] . '">';
+                        echo '<label id="lbl-alt" for="questao_' . $question['questao_codigo'] . '">' . $alternative['alternativa_texto'];
+                        echo '</label><br>';
                     }
                     echo '</div>';
-                    echo '</div>';
+                    
+
+
+
+
+
+
+
                 }
                 
-                print_r ($questions);
+                //print_r ($questions);
             }
             ?>
-            <div class="submit-button">
-                <button type="submit" class="btn btn-primary">Enviar Respostas</button>
-            </div>
+            
+            <input id="botao-enviar-respostas" type="submit" value="Enviar Respostas">
+            
         </form>
     </div>
 
