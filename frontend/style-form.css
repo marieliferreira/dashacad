@@ -507,6 +507,31 @@ td{
     border-radius: 10px;
 }
 
+#lbl-aluno{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 130px;
+  top: 390px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#aluno{
+    position: absolute;
+    width: 150px;
+    height: 30px;
+    left: 80px;
+    top: 420px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+}
+
+
 #lbl-prazo-form{
   position: absolute;
   width: 65px;

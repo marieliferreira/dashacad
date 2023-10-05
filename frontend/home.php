@@ -134,3 +134,14 @@
 </html>
 
 <script src="script.js" ></script>
+
+<script>
+    // Obtém o elemento do botão pelo ID
+    var btnPizza = document.getElementById("btn-pizza");
+
+    // Adiciona um evento de clique ao botão
+    btnPizza.addEventListener("click", function() {
+        // Redireciona para a página chart.php
+        window.location.href = "chart.php";
+    });
+</script>

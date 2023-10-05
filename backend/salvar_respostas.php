@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $codigo_formulario = $_POST['codigo_formulario'];
 
             // Insira a nota total na tabela tbl_nota_formulario
-            $query_inserir_nota = "INSERT INTO tbl_nota_formulario (FOR_CODIGO, NFO_NOTA, USU_CODIGO_CAD, USU_CODIGO_ALT, NFO_TOTAL_QUESTOES_CERTAS) VALUES ('$codigo_formulario', '$nota_total', '$usuario_codigo', '$usuario_codigo', '$questoes_certas')";
+            $query_inserir_nota = "INSERT INTO tbl_nota_formulario (FOR_CODIGO, NFO_NOTA, USU_CODIGO_CAD, USU_CODIGO_ALT, NFO_TOTAL_QUESTOES_CERTAS, FOR_STATUS) VALUES ('$codigo_formulario', '$nota_total', '$usuario_codigo', '$usuario_codigo', '$questoes_certas', 'respondido')";
             $result_inserir_nota = $mysqli->query($query_inserir_nota);
 
             if (!$result_inserir_nota) {

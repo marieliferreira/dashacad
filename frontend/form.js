@@ -297,3 +297,23 @@ function salvarOption(button, codigo_questao) {
 function generateUniqueId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
+
+
+// Recupera os dados do localStorage ao carregar a página
+window.onload = function() {
+  // Verifica se existem dados armazenados no localStorage para as alternativas
+  if (localStorage.getItem('alternativas')) {
+      // Recupera os dados das alternativas
+      const alternativas = JSON.parse(localStorage.getItem('alternativas'));
+
+      // Itera sobre as alternativas e as adiciona às questões correspondentes
+      alternativas.forEach(function(alternativa) {
+          const codigo_questao = alternativa.codigo_questao;
+          const nome_alternativa = alternativa.nome_alternativa;
+
+          // Adiciona a alternativa à questão correspondente
+          addOption(codigo_questao, nome_alternativa);
+      });
+  }
+};
+
