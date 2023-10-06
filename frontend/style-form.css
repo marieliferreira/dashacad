@@ -349,7 +349,7 @@ td{
   position: absolute;
   width: 400px;
   height: 41px;
-  left: 280px;
+  left: 470px;
   top: 30px;
   font-family: 'Nunito';
   font-style: normal;
@@ -511,8 +511,8 @@ td{
   position: absolute;
   width: 65px;
   height: 27px;
-  left: 130px;
-  top: 390px;
+  left: 80px;
+  top: 100px;
   font-family: 'Nunito';
   font-style: normal;
   font-weight: 900;
@@ -523,10 +523,10 @@ td{
 
 #aluno{
     position: absolute;
-    width: 150px;
+    width: 170px;
     height: 30px;
-    left: 80px;
-    top: 420px;
+    left: 150px;
+    top: 100px;
     border: 1px solid #023D54;
     border-radius: 10px;
 }
@@ -566,6 +566,18 @@ td{
     background: #023D54;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
+}
+
+#btn-filtrar{
+  position: absolute;
+  text-decoration: underline;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #023D54;
+  top: 100px;
+  left: 330px;
+  width: 147px;
+  height: 40px;
 }
 
 #btn-salvar-turma{
@@ -655,4 +667,21 @@ td{
     border: 1px solid #023D54;
     border-radius: 10px;
     padding: 10px;
+}
+
+#filtro-aluno-form{
+  top: 50px;
+}
+
+#div-fundo-grafico{
+  position: absolute;
+  top: 80px;
+  left: 100px;
+  height: 800px;
+  width: 1149px;
+
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }

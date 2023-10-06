@@ -1,2 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css");
 
+#myChart{
+    position: absolute;
+    top: 200px;
+}
