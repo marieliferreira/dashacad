@@ -137,7 +137,7 @@
 
 <script>
     // Obtém o elemento do botão pelo ID
-    var btnPizza = document.getElementById("btn-pizza");
+    var btnPizza = document.getElementById("btn-linha");
 
     // Adiciona um evento de clique ao botão
     btnPizza.addEventListener("click", function() {

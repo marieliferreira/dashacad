@@ -34,7 +34,7 @@ if(isset($_POST['botao-logout'])){
 
 ?>
 
-<div class="cabecalho-branco-home">
+<div class="cabecalho-branco-home no-print">
 
 
 <div class="container-fluid">
@@ -64,18 +64,21 @@ if(isset($_POST['botao-logout'])){
         
   </div>
   
-
+<div class="print-container">
   <div id="div-fundo-grafico">
     <form id="filtro-aluno-form" >
-          <h4 id="h4-reg-form">Gráfico de barras</h4>
+          <h4 id="h4-reg-form" class="print-only">Gráfico de linhas</h4>
     
           <label id="lbl-aluno" for="aluno">Alunos:</label>
           <select id="aluno" name="aluno" >
           <option value="">Selecione um aluno</option>
           </select>
     
-          <a id="btn-filtrar"  type ="button">Filtrar</a>
+          <a id="btn-filtrar" class="no-print" type ="button">Filtrar</a>
     </form>
+
+    <button id="btn-imprimir" class="no-print" type="button">Imprimir Gráfico</button>
+
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         </script>
@@ -109,7 +112,7 @@ if(isset($_POST['botao-logout'])){
       }
     </script>
       <div>
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <canvas id="myChart" class="print-only" style="width:100%;max-width:700px"></canvas>
       </div>
 
       
@@ -144,34 +147,71 @@ if(isset($_POST['botao-logout'])){
                 }
             });
         });
+
+        // Manipula o clique no botão "Imprimir"
+        $('#btn-imprimir').on('click', function () {
+            // Chame a função para imprimir o gráfico
+            imprimirGrafico();
+        });
+
+        function imprimirGrafico() {
+            window.print();
+        }
+
         });
         // Função para criar o gráfico
-        function criarGrafico(formulario, nota) {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'horizontalBar',
-            data: {
-                labels: formulario,
-                datasets: [{
-                    label: 'Nota',
-                    backgroundColor: ['green', 'blue', 'yellow'],
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: nota
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
+        // Função para criar o gráfico
+// Função para criar o gráfico
+function criarGrafico(formulario, nota) {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = null;
+
+    
+    // Verifica se já existe um gráfico e o destrói
+    if (chart !== null) {
+        chart.destroy();
+    }
+
+    chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: formulario,
+            datasets: [{
+                label: 'Nota',
+                backgroundColor: 'transparent',
+                borderColor: 'blue',
+                data: nota
+            }]
+        },
+        options: {
+          title: { // Adicione esta seção para o título
+            display: true,
+            text: 'Evolução do aluno', // Substitua por seu título desejado
+            fontSize: 16, // Tamanho da fonte do título
+            fontColor: 'black' // Cor da fonte do título
+        },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Formulários', // Substitua 'Eixo X' pelo rótulo desejado para o eixo X
+                    },
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Notas', // Substitua 'Eixo Y' pelo rótulo desejado para o eixo Y
+                    },
+                }],
             }
-        });
         }
+    });
+}
+
+
     </script>
     
   </div>
+</div>
 </body>
 </html>

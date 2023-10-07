@@ -3,4 +3,36 @@
 #myChart{
     position: absolute;
     top: 200px;
+    left: 200px;
 }
+
+/* Estilos para impressão */
+@media print {
+    body {
+        margin: 0; /* Remover margens padrão do corpo */
+    }
+    
+    #div-fundo-grafico{
+        left: -10px;
+    }
+
+    .print-container {
+        margin: 0 auto; /* Centralizar o conteúdo horizontalmente */
+        max-width: 100%; /* Garantir que o conteúdo se ajuste à largura da página */
+    }
+    
+    .print-only {
+        display: block; /* Exibir o elemento ao imprimir */
+    }
+}
+
+/* Estilos para ocultar elementos na impressão */
+@media print {
+    .no-print {
+        display: none; /* Ocultar o elemento ao imprimir */
+    }
+}
+
+
+
+
