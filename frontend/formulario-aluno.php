@@ -129,13 +129,6 @@ if (isset($_POST['botao-logout'])) {
                     }
                     echo '</div>';
                     
-
-
-
-
-
-
-
                 }
                 
                 //print_r ($questions);

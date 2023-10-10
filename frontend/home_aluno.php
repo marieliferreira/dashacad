@@ -79,14 +79,14 @@
             <i class="fas fa-check-square text-center"></i>
             <h4 class="text-center" id="h4-respondidos">Respondidos</h4>
             <div>
-            <a href="">Acessar</a>
+            <a href="../frontend/exibe_formularios_respondidos.php">Acessar</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-nparciais" >
           <i class="fas fa-graduation-cap text-center"></i>
             <h4 class="text-center" id="h4-notas-parciais">Notas Parciais</h4>
             <div>
-            <a href="">Acessar</a>
+            <a href="../frontend/exibe_notas_parciais.php">Acessar</a>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
             <i class="fas fa-book text-center"></i>
             <h4 class="text-center" id="h4-disciplinas">Disciplinas</h4>
             <div>
-            <a href="">Acessar</a>
+            <a href="../frontend/exibe_disciplina.php">Acessar</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-nparciais" >

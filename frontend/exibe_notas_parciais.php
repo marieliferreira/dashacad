@@ -64,76 +64,75 @@
             </div>
             
       </div>
-<span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home.php"></a></span>
+<span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home_aluno.php"></a></span>
 <div id="div-tbl">
 
     <h4 id="h4-form">Formulários</h1>
 
     <?php
-    
-    include("../backend/conexao.php");
-    
-    // Consulta SQL para selecionar as colunas da tabela "tbl-formulario"
-    $sql = "SELECT * FROM tbl_formulario";
+        include("../backend/conexao.php");
 
-    
-    // Executa a consulta SQL
-    if ($result = $mysqli->query($sql)) {
-    
-        // Verifica se há registros
-        if ($result->num_rows > 0) {
-    
-            // Exibe os dados em uma tabela HTML
-            echo "<table border = 1>";
-            
-    
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td id='tbl-cod-form'>" . $row["FOR_CODIGO"] . "</td>";
-                echo "<td id='tbl-titulo-form'>" . $row["FOR_TITULO"] . "</td>";
-            
-                // Consulta SQL para obter o nome da disciplina com base no código
-                $disciplinaSql = "SELECT DIS_NOME FROM tbl_disciplina WHERE DIS_CODIGO = " . $row["DIS_CODIGO"];
-            
-                // Executa a consulta para obter o nome da disciplina
-                $disciplinaResult = $mysqli->query($disciplinaSql);
-            
-                // Verifica se há registros
-                if ($disciplinaResult && $disciplinaResult->num_rows > 0) {
-                    $disciplinaRow = $disciplinaResult->fetch_assoc();
-                    $disciplinaNome = $disciplinaRow["DIS_NOME"];
-                    echo "<td id='tbl-disciplina-nome'>" . $disciplinaNome . "</td>";
-                } else {
-                    echo "<td id='tbl-disciplina-nome'>Nome da Disciplina não encontrado</td>";
+        // Consulta SQL para selecionar os formulários que foram respondidos pelo aluno logado, incluindo a nota correspondente
+        $sql = "SELECT f.FOR_CODIGO, f.FOR_TITULO, f.FOR_DESCRICAO, f.DIS_CODIGO, nf.NFO_NOTA 
+        FROM tbl_formulario f
+        INNER JOIN tbl_nota_formulario nf ON f.FOR_CODIGO = nf.FOR_CODIGO 
+        WHERE nf.USU_CODIGO_CAD = '$codigo_usuario' AND nf.FOR_STATUS = 'respondido'";
+
+        // Executa a consulta SQL
+        if ($result = $mysqli->query($sql)) {
+            // Verifica se há registros
+            if ($result->num_rows > 0) {
+                // Exibe os dados em uma tabela HTML
+                echo "<table border = 1>";
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td id='tbl-cod-form'>" . $row["FOR_CODIGO"] . "</td>";
+                    echo "<td id='tbl-titulo-form'>" . $row["FOR_TITULO"] . "</td>";
+
+                    // Verifica se DIS_CODIGO está definido no array $row
+                    if(isset($row['DIS_CODIGO'])) {
+                        // Consulta SQL para obter o nome da disciplina com base no código
+                        $disciplinaSql = "SELECT DIS_NOME FROM tbl_disciplina WHERE DIS_CODIGO = " . $row["DIS_CODIGO"];
+                    
+                        // Executa a consulta para obter o nome da disciplina
+                        $disciplinaResult = $mysqli->query($disciplinaSql);
+                    
+                        // Verifica se há registros
+                        if ($disciplinaResult && $disciplinaResult->num_rows > 0) {
+                            $disciplinaRow = $disciplinaResult->fetch_assoc();
+                            $disciplinaNome = $disciplinaRow["DIS_NOME"];
+                            echo "<td id='tbl-disciplina-nome'>" . $disciplinaNome . "</td>";
+                        } else {
+                            echo "<td id='tbl-disciplina-nome'>Nome da Disciplina não encontrado</td>";
+                        }
+                    } else {
+                        echo "<td id='tbl-disciplina-nome'>Sem Disciplina</td>";
+                    }
+
+                    // Exibe a nota em vez do botão de "Responder"
+                    echo "<td>Nota: " . $row["NFO_NOTA"] . "</td>";
+
+                    echo "</tr>";
                 }
-            
-                
-                echo "<td> <a class='fa fa-plus btn-adicionar' href='questoes.php?codigo=" . urlencode($row["FOR_CODIGO"]) . "&titulo=" . urlencode($row["FOR_TITULO"]) . "&descricao=" . urlencode($row["FOR_DESCRICAO"]) . "'></a></td>";
-                echo "<td> <a href='' class= 'far fa-edit btn-editar'></a></td>";
-                echo "<td> <a href='' class= 'fas fa-trash btn-excluir'></a></td>";
-                echo "</tr>";
-            }
-            
-    
-    
-            echo "</table>";
-    
-            // Libera o resultado
-            $result->free();
-        } else {
-            echo "Não foram encontrados registros.";
-        }
-    
-    } else {
-        echo "Erro ao executar a consulta: (" . $mysqli->errno . ") " . $mysqli->error;
-    }
-    
-    // Fecha a conexão
-    $mysqli->close();
-    
-    ?>
-</div>
 
+                echo "</table>";
+
+                // Libera o resultado
+                $result->free();
+            } else {
+                echo "Não foram encontrados registros.";
+            }
+        } else {
+            echo "Erro ao executar a consulta: (" . $mysqli->errno . ") " . $mysqli->error;
+        }
+
+        // Fecha a conexão
+        $mysqli->close();
+        ?>
+    
+</div>
+    
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"       integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
     crossorigin="anonymous">
 

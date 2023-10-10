@@ -117,9 +117,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo '<p>Questões certas: ' . $total_questoes . ' de ' . count($respostas) . '</p>';
                 }
             }
+
+
         }
     }
-    $mysqli->close();
+
 } else {
     echo "Método de requisição inválido.";
 }

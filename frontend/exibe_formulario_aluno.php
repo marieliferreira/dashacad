@@ -73,8 +73,10 @@
     
     include("../backend/conexao.php");
     
-    // Consulta SQL para selecionar as colunas da tabela "tbl-formulario"
-    $sql = "SELECT * FROM tbl_formulario";
+    // Consulta SQL para selecionar os formulários que o aluno ainda não respondeu
+    $sql = "SELECT f.* FROM tbl_formulario f
+            LEFT JOIN tbl_nota_formulario nf ON f.FOR_CODIGO = nf.FOR_CODIGO AND nf.USU_CODIGO_CAD = '$codigo_usuario'
+            WHERE nf.FOR_CODIGO IS NULL OR nf.FOR_STATUS != 'respondido'";
 
     
     // Executa a consulta SQL
@@ -131,6 +133,7 @@
     
     ?>
 </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"       integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
     crossorigin="anonymous">
