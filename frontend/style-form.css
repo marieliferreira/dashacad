@@ -673,6 +673,19 @@ td{
   top: 50px;
 }
 
+#btn-imprimir{
+  position: absolute;
+  left: 500px;
+  top: 100px;
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  color: #023D54;
+  font-weight: 600;
+  border: 1px solid #023D54;
+  background: #FFF;
+}
+
 #div-fundo-grafico{
   position: absolute;
   top: 80px;

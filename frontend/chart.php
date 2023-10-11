@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-form.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="chart.css">
     <title>DashAcad</title>
 </head>
@@ -66,6 +67,7 @@ if(isset($_POST['botao-logout'])){
   
 <div class="print-container">
   <div id="div-fundo-grafico">
+  <a class="fa fa-arrow-left" id="btn-voltar-registro" href="home.php"></a>
     <form id="filtro-aluno-form" >
           <h4 id="h4-reg-form" class="print-only">Gráfico de linhas</h4>
     
