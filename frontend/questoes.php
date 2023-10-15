@@ -125,7 +125,10 @@
 
           // Percorre as questões e adiciona ao formulário
           questoes.forEach((questao) => {
-            addQuestion(questao.codigo_questao, questao.nome_questao);
+            // Verificar se a questão pertence ao formulário atual
+            if (questao.codigo_formulario === <?php echo json_encode($codigo); ?>) {
+              addQuestion(questao.codigo_questao, questao.nome_questao);
+            }
           });
         }
       });
@@ -150,6 +153,8 @@
                 var novaQuestao = $("#input-new-questao").val();
                 var codigoFormulario = $("#codigo-formulario").val();
 
+              if (codigoFormulario === <?php echo json_encode($codigo); ?>) {
+
                 $.ajax({
                   method: "POST",
                   url: "../backend/registro-questao.php",
@@ -164,10 +169,10 @@
                       $("#mensagem").fadeOut();
                     }, 3000);
                   }
-                  addQuestion(codigoQuestao, novaQuestao);
 
                   // Armazena os dados das questões no localStorage
                   const questaoData = {
+                    codigo_formulario: codigoFormulario,
                     codigo_questao: codigoQuestao,
                     nome_questao: novaQuestao,
                   };
@@ -185,9 +190,13 @@
                     // Armazena os dados no localStorage
                     localStorage.setItem('questoes', JSON.stringify(questoes));
                   }
-                  }
-                  
-                );
+                  // Adicione a nova questão ao formulário
+                  // Adicione a nova questão ao formulário
+                    addQuestion(questaoData.codigo_questao, questaoData.nome_questao);
+                  });
+              } else {
+                console.log("A nova questão não pertence ao formulário atual.");
+              }
             }
         );
 

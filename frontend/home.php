@@ -142,6 +142,14 @@
     // Adiciona um evento de clique ao botão
     btnPizza.addEventListener("click", function() {
         // Redireciona para a página chart.php
-        window.location.href = "chart.php";
+        window.location.href = "linha-evolucao.php";
+    });
+
+    var btnPizza = document.getElementById("btn-pizza");
+
+    // Adiciona um evento de clique ao botão
+    btnPizza.addEventListener("click", function() {
+        // Redireciona para a página chart.php
+        window.location.href = "pizza-acertos.php";
     });
 </script>

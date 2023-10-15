@@ -12,7 +12,6 @@
     <title>DashAcad</title>
 </head>
 <body>
-
 <?php
 
 session_start();
@@ -67,16 +66,21 @@ if(isset($_POST['botao-logout'])){
   
 <div class="print-container">
   <div id="div-fundo-grafico">
-  <a class="fa fa-arrow-left" id="btn-voltar-registro" href="home.php"></a>
+  <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home.php"></a>
     <form id="filtro-aluno-form" >
-          <h4 id="h4-reg-form" class="print-only">Gráfico de linhas</h4>
+          <h4 id="h4-reg-form" class="print-only">Gráfico de pizza</h4>
     
           <label id="lbl-aluno" for="aluno">Alunos:</label>
           <select id="aluno" name="aluno" >
           <option value="">Selecione um aluno</option>
           </select>
+
+          <label id="lbl-formulario-pizza" for="formulario-pizza">Formulário:</label>
+          <select id="formulario-pizza" name="formulario-pizza">
+          <option value="">Escolha o formulário</option>
+          </select>
     
-          <a id="btn-filtrar" class="no-print" type ="button">Filtrar</a>
+          <a id="btn-filtrar-pizza" class="no-print" type ="button">Filtrar</a>
     </form>
 
     <button id="btn-imprimir" class="no-print" type="button">Imprimir Gráfico</button>
@@ -91,6 +95,7 @@ if(isset($_POST['botao-logout'])){
       $(document).ready(function() {
         // chama a função ao carregar a página
         preencheSelectAluno();
+        preencheSelectFormulario();
       });
     function preencheSelectAluno() {
         // faz uma solicitação AJAX para o arquivo PHP
@@ -112,6 +117,27 @@ if(isset($_POST['botao-logout'])){
           }
         });
       }
+
+      function preencheSelectFormulario() {
+      // faz uma solicitação AJAX para o arquivo PHP
+      $.ajax({
+        url: '../backend/consulta-formulario.php',
+        type: 'POST',
+        dataType: 'json',
+        success: function(data) {
+          // adiciona cada disciplina como uma opção no campo select
+          for (var i = 0; i < data.length; i++) {
+            $('#formulario-pizza').append($('<option>', {
+              value: data[i].FOR_CODIGO,
+              text: data[i].FOR_TITULO
+            }));
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        }
+      });
+    }
     </script>
       <div>
         <canvas id="myChart" class="print-only" style="width:100%;max-width:700px"></canvas>
@@ -119,36 +145,45 @@ if(isset($_POST['botao-logout'])){
 
       
     <script>
-        $(document).ready(function () {
-        // Manipula o clique no botão "Filtrar"
-        $('#btn-filtrar').on('click', function () {
-            // Obtem o valor selecionado do <select>
-            var alunoSelecionado = $('#aluno').val();
-            // Realiza a solicitação AJAX com o valor do aluno selecionado
+
+$(document).ready(function () {
+    // Manipula o clique no botão "Filtrar"
+    $('#btn-filtrar-pizza').on('click', function () {
+        // Obtenha os valores selecionados dos campos <select>
+        var alunoSelecionado = $('#aluno').val();
+        var formularioSelecionado = $('#formulario-pizza').val();
+      
             $.ajax({
                 type: "POST",
-                url: "../backend/chart.php",
-                data: { aluno: alunoSelecionado },
+                url: "../backend/pizza-acertos.php",
+                data: {
+                    aluno: alunoSelecionado,
+                    formulario_pizza: formularioSelecionado
+                },
                 dataType: "json",
                 success: function (data) {
-                    // Processa os dados e cria o gráfico
+                    console.log(data);
                     if (data && data.length > 0) {
-                        var formularioarray = [];
+                        // Processa os dados e cria o gráfico
+                        var questoesarray = [];
                         var notaarray = [];
                         for (var i = 0; i < data.length; i++) {
-                            formularioarray.push(data[i].FOR_CODIGO); // Pegando o formulario
-                            notaarray.push(data[i].NFO_NOTA); // Pegando a nota
+                            questoesarray.push(data[i].QUANTIDADE_QUESTOES);
+                            notaarray.push(data[i].RESULTADO_CORRETAS);
                         }
-                        criarGrafico(formularioarray, notaarray);
+                        criarGrafico(questoesarray, notaarray);
                     } else {
                         console.error("Dados inválidos ou vazios.");
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(textStatus, errorThrown);
-                }
+                console.error("Erro na solicitação AJAX:", textStatus, errorThrown);
+                // Trate o erro, exiba uma mensagem para o usuário, etc.
+               }
             });
-        });
+    });
+
+
 
         // Manipula o clique no botão "Imprimir"
         $('#btn-imprimir').on('click', function () {
@@ -164,10 +199,13 @@ if(isset($_POST['botao-logout'])){
         // Função para criar o gráfico
         // Função para criar o gráfico
 // Função para criar o gráfico
-function criarGrafico(formulario, nota) {
+function criarGrafico(questoes, nota) {
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = null;
-
+    const barColors = [
+    "#b91d47",
+    "#00aba9"
+    ];
     
     // Verifica se já existe um gráfico e o destrói
     if (chart !== null) {
@@ -175,12 +213,12 @@ function criarGrafico(formulario, nota) {
     }
 
     chart = new Chart(ctx, {
-        type: 'line',
+        type: 'pie',
         data: {
             labels: formulario,
             datasets: [{
                 label: 'Nota',
-                backgroundColor: 'transparent',
+                backgroundColor: barColors,
                 borderColor: 'blue',
                 data: nota
             }]
@@ -188,24 +226,10 @@ function criarGrafico(formulario, nota) {
         options: {
           title: { // Adicione esta seção para o título
             display: true,
-            text: 'Evolução do aluno', // Substitua por seu título desejado
+            text: 'Acertos no formulário', // Substitua por seu título desejado
             fontSize: 16, // Tamanho da fonte do título
             fontColor: 'black' // Cor da fonte do título
         },
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Formulários', // Substitua 'Eixo X' pelo rótulo desejado para o eixo X
-                    },
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Notas', // Substitua 'Eixo Y' pelo rótulo desejado para o eixo Y
-                    },
-                }],
-            }
         }
     });
 }
