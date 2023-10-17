@@ -109,7 +109,7 @@
             <i class="fas fa-user text-center"></i>
             <h4 class="text-center" id="h4-perfil">Perfil</h4>
             <div>
-            <a id="id-acessar" class="class-acessar" href="">Acessar</a>
+            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_perfil_usuario.php">Acessar</a>
             </div>
           </div>
         </div>

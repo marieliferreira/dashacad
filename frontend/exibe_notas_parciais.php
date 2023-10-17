@@ -67,67 +67,52 @@
 <span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home_aluno.php"></a></span>
 <div id="div-tbl">
 
-    <h4 id="h4-form">Formulários</h1>
+    <h4 id="h4-form">Notas Parciais</h1>
 
     <?php
         include("../backend/conexao.php");
 
-        // Consulta SQL para selecionar os formulários que foram respondidos pelo aluno logado, incluindo a nota correspondente
-        $sql = "SELECT f.FOR_CODIGO, f.FOR_TITULO, f.FOR_DESCRICAO, f.DIS_CODIGO, nf.NFO_NOTA 
+        // Executa a nova consulta SQL para calcular a média das notas por disciplina
+        $sql = "SELECT f.DIS_CODIGO, AVG(nf.NFO_NOTA) AS MEDIA_NOTA
         FROM tbl_formulario f
         INNER JOIN tbl_nota_formulario nf ON f.FOR_CODIGO = nf.FOR_CODIGO 
-        WHERE nf.USU_CODIGO_CAD = '$codigo_usuario' AND nf.FOR_STATUS = 'respondido'";
+        WHERE nf.USU_CODIGO_CAD = '$codigo_usuario' AND nf.FOR_STATUS = 'respondido'
+        GROUP BY f.DIS_CODIGO";
 
-        // Executa a consulta SQL
         if ($result = $mysqli->query($sql)) {
-            // Verifica se há registros
             if ($result->num_rows > 0) {
-                // Exibe os dados em uma tabela HTML
-                echo "<table border = 1>";
+                echo "<table border='1'>";
+                echo "<tr><th>Disciplina</th><th>Média</th></tr>";
 
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td id='tbl-cod-form'>" . $row["FOR_CODIGO"] . "</td>";
-                    echo "<td id='tbl-titulo-form'>" . $row["FOR_TITULO"] . "</td>";
+                    // Obtém o nome da disciplina com base no código
+                    $disciplinaSql = "SELECT DIS_NOME FROM tbl_disciplina WHERE DIS_CODIGO = " . $row["DIS_CODIGO"];
+                    $disciplinaResult = $mysqli->query($disciplinaSql);
+                    $disciplinaNome = "Sem Disciplina";
 
-                    // Verifica se DIS_CODIGO está definido no array $row
-                    if(isset($row['DIS_CODIGO'])) {
-                        // Consulta SQL para obter o nome da disciplina com base no código
-                        $disciplinaSql = "SELECT DIS_NOME FROM tbl_disciplina WHERE DIS_CODIGO = " . $row["DIS_CODIGO"];
-                    
-                        // Executa a consulta para obter o nome da disciplina
-                        $disciplinaResult = $mysqli->query($disciplinaSql);
-                    
-                        // Verifica se há registros
-                        if ($disciplinaResult && $disciplinaResult->num_rows > 0) {
-                            $disciplinaRow = $disciplinaResult->fetch_assoc();
-                            $disciplinaNome = $disciplinaRow["DIS_NOME"];
-                            echo "<td id='tbl-disciplina-nome'>" . $disciplinaNome . "</td>";
-                        } else {
-                            echo "<td id='tbl-disciplina-nome'>Nome da Disciplina não encontrado</td>";
-                        }
-                    } else {
-                        echo "<td id='tbl-disciplina-nome'>Sem Disciplina</td>";
+                    if ($disciplinaResult && $disciplinaResult->num_rows > 0) {
+                        $disciplinaRow = $disciplinaResult->fetch_assoc();
+                        $disciplinaNome = $disciplinaRow["DIS_NOME"];
                     }
 
-                    // Exibe a nota em vez do botão de "Responder"
-                    echo "<td>Nota: " . $row["NFO_NOTA"] . "</td>";
-
+                    echo "<tr>";
+                    echo "<td>" . $disciplinaNome . "</td>";
+                    echo "<td>" . round($row["MEDIA_NOTA"], 2) . "</td>"; // Arredonda a média para duas casas decimais
                     echo "</tr>";
                 }
 
                 echo "</table>";
-
-                // Libera o resultado
-                $result->free();
             } else {
                 echo "Não foram encontrados registros.";
             }
+
+            $result->free();
         } else {
             echo "Erro ao executar a consulta: (" . $mysqli->errno . ") " . $mysqli->error;
         }
 
-        // Fecha a conexão
+        // ... (seu código existente)
+
         $mysqli->close();
         ?>
     

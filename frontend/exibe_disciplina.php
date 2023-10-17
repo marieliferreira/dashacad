@@ -67,7 +67,7 @@
 <span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home_aluno.php"></a></span>
 <div id="div-tbl">
 
-    <h4 id="h4-form">Formulários</h1>
+    <h4 id="h4-form">Disciplinas</h1>
 
     <?php
         include("../backend/conexao.php");
