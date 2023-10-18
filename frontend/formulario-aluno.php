@@ -80,6 +80,7 @@ if (isset($_POST['botao-logout'])) {
     $result = $mysqli->query($query);
     ?>
 
+    
     <div id="titulo-form">
         <span>
             <label id="lbl-codigo-form" for=""><?php echo 'F' . $codigo . '.' ?></label>
@@ -90,6 +91,7 @@ if (isset($_POST['botao-logout'])) {
     
     <div id="questions-form">
         <form id="form-questao" method="POST">
+        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home_aluno.php"></a>
             <!-- Substitua "processar_respostas.php" pelo script que processará as respostas -->
             <input type="hidden" id="codigo_formulario" name="codigo_formulario" value="<?php echo $codigo ?>">
             <?php

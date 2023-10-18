@@ -23,7 +23,7 @@ if (isset($_POST['aluno']) && isset($_POST['formulario_pizza'])) {
             $formulario_codigo = $row_formulario["FOR_CODIGO"];
 
             // Consulta a quantidade de questões do formulário
-            $consulta_questoes = "SELECT COUNT(*) as total_questoes FROM tbl_questoes WHERE FOR_CODIGO = '$formulario_codigo'";
+            $consulta_questoes = "SELECT COUNT(*) as total_questoes FROM tbl_questao WHERE FOR_CODIGO = '$formulario_codigo'";
             $resultado_questoes = mysqli_query($mysqli, $consulta_questoes);
             $row_questoes = $resultado_questoes->fetch_assoc();
             $total_questoes = $row_questoes["total_questoes"];
