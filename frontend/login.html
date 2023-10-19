@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,11 +10,8 @@
     <title>DashAcad</title>
 </head>
 <body>
-    <script
-  src="https://code.jquery.com/jquery-3.6.4.min.js"
-  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
-  crossorigin="anonymous"></script>
-<div id="fundo">
+
+    <div id="fundo">
         <div class="cabecalho-branco"></div>
     <header class="cabecalho">
         <img class="cabecalho-imagem" src="../frontend/imagens/logo-dashacad-gray.png" alt="Logo da plataforma DashAcad" width="104px" height="70px">
@@ -33,7 +28,7 @@
                 <div class="conteudo-principal-escrito">
                     <h2>Olá! Seja bem vindo(a) ao DashAcad, sua plataforma de gerenciamento de aprendizagem online.</h2>
                 </div>
-                <button onclick="window.location.href = '../backend/processa_login.php';" class="conteudo-principal-escrito-botao" >Entrar</button>
+                <p class="conteudo-principal-escrito-botao" style="padding-left: 45px; padding-top: 5px;">Entrar</p>
             </div>
             <img class="conteudo-principal-imagem" src="../frontend/imagens/pc-cel.png" alt="Imagem ilustrativa da plataforma">
         </section>
@@ -45,57 +40,61 @@
     </div>
 
     <div id="transparente"></div>
-    
+
+
     <div id="tela-login">
-    <img id="imagem-login" src="../frontend/imagens/logo-dashacad-white.png" alt="Logo do DashAcad">
-    <div id="texto-login">
-    <p id="linha-vertical"></p>
-    <h2 id="titulo-login">Login</h2>
-    
-    <p id="login_error"></p>
-    
-    <form>
-        <p>
-        <label id="lbl-email">Email:</label><br>
-		<input id="input-email" placeholder="name@gmail.com" type="email" name="input-email"><br>
-        <script>document.getElementById("input-email").focus();</script>
-        </p>
-        
-        <p>
-        <label id="lbl-senha">Senha:</label><br>
-		<input id="input-senha" type="password" name="input-senha"><br><br>
-        </p>
-		
-        <p>
-            <button id="btn-entrar" >Entrar</button>
-        </p>
-    </form>
+        <img id="imagem-login" src="../frontend/imagens/logo-dashacad-white.png" alt="Logo do DashAcad">
+        <div id="texto-login">
+            <p id="linha-vertical"></p>
+            <h2 id="titulo-login">Login</h2>
+            
+            <p id="login_error"></p>
+            
+            <form id="login-form">
+                <p>
+                    <label id="lbl-email">Email:</label><br>
+                    <input id="input-email" placeholder="name@gmail.com" type="email" name="input-email"><br>
+                </p>
+                
+                <p>
+                    <label id="lbl-senha">Senha:</label><br>
+                    <input id="input-senha" type="password" name="input-senha"><br><br>
+                </p>
+                
+                <p>
+                    <button id="btn-entrar">Entrar</button>
+                </p>
+            </form>
 
-    <p id="not-conta">Ainda não possui uma conta?</p>
-    <p id="registrar"><a href="registro.html">Registrar-se</a></p>
+            <p id="not-conta">Ainda não possui uma conta?</p>
+            <p id="registrar"><a href="registro.html">Registrar-se</a></p>
+        </div>
     </div>
-    </div>
-</body>
-<script>
-    $("#btn-entrar").click(function(){
-        var email = $("#input-email").val();
-        var senha = $("#input-senha").val();
 
-        $.ajax({
-            method: "POST",
-            url: "../backend/processa_login.php",
-            data: {'input-email': email, 'input-senha' : senha} 
-        }).done(function(resposta) {
-            console.log(resposta);
+    <!-- Seus scripts JavaScript aqui -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#btn-entrar").click(function(e) {
+                e.preventDefault();
+                var email = $("#input-email").val();
+                var senha = $("#input-senha").val();
 
-            if (resposta === 'Aluno') {
-                window.location = "../frontend/home_aluno.php"; // Redirect to student page
-            } else if (resposta === 'Professor') {
-                window.location = "../frontend/home.php"; // Redirect to teacher page
-            }  else {
-                $("#login_error").text(resposta);
-            }
+                $.ajax({
+                    method: "POST",
+                    url: "../backend/processa_login.php",
+                    data: { 'input-email': email, 'input-senha': senha }
+                }).done(function(resposta) {
+                    if (resposta === 'Aluno') {
+                        window.location = "../frontend/home_aluno.php";
+                    } else if (resposta === 'Professor') {
+                        window.location = "../frontend/home.php";
+                    } else {
+                        $("#login_error").text(resposta);
+                    }
+                });
+            });
         });
-    });
-</script>
+    </script>
+</body>
 </html>
