@@ -616,6 +616,18 @@ td{
   height: 40px;
 }
 
+#btn-filtrar-coluna{
+  position: absolute;
+  text-decoration: underline;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #023D54;
+  top: 100px;
+  left: 650px;
+  width: 50px;
+  height: 40px;
+}
+
 
 #btn-salvar-turma{
   position: absolute;
@@ -706,7 +718,7 @@ td{
     padding: 10px;
 }
 
-#filtro-aluno-form{
+#filtro-form{
   top: 50px;
 }
 
@@ -734,4 +746,52 @@ td{
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+#lbl-turma-coluna{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 80px;
+  top: 100px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#turma-coluna{
+    position: absolute;
+    width: 175px;
+    height: 30px;
+    left: 145px;
+    top: 100px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
+}
+
+#lbl-disciplina-coluna{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 350px;
+  top: 100px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#disciplina-coluna{
+    position: absolute;
+    width: 185px;
+    height: 30px;
+    left: 445px;
+    top: 100px;
+    border: 1px solid #023D54;
+    border-radius: 10px;
 }

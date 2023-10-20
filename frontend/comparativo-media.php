@@ -68,16 +68,16 @@ if(isset($_POST['botao-logout'])){
     <div id="div-fundo-grafico">
         <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home.php"></a>
         <form id="filtro-form">
-            <h4 id="h4-reg-form" class="print-only">Gráfico de pizza</h4>
-            <label id="lbl-aluno" for="aluno">Alunos:</label>
-            <select id="aluno" name="aluno">
-                <option value="">Selecione um aluno</option>
+            <h4 id="h4-reg-form" class="print-only">Gráfico de colunas</h4>
+            <label id="lbl-turma-coluna" for="turma-coluna">Turma:</label>
+            <select id="turma-coluna" name="turma-coluna">
+                <option value="">Selecione uma turma</option>
             </select>
-            <label id="lbl-formulario-pizza" for="formulario-pizza">Formulário:</label>
-            <select id="formulario-pizza" name="formulario-pizza">
-                <option value="">Escolha o formulário</option>
+            <label id="lbl-disciplina-coluna" for="disciplina-coluna">Disciplina:</label>
+            <select id="disciplina-coluna" name="disciplina-coluna">
+                <option value="">Escolha uma disciplina</option>
             </select>
-            <a id="btn-filtrar-pizza" class="no-print" type="button">Filtrar</a>
+            <a id="btn-filtrar-coluna" class="no-print" type="button">Filtrar</a>
         </form>
         <button id="btn-imprimir" class="no-print" type="button">Imprimir Gráfico</button>
         <div>
@@ -92,64 +92,64 @@ if(isset($_POST['botao-logout'])){
         <script>
             $(document).ready(function () {
                 // Chama a função ao carregar a página
-                preencheSelectAluno();
-                preencheSelectFormulario();
+                preencheSelectTurma();
+                preencheSelectDisciplina();
             });
 
-            function preencheSelectAluno() {
-                // Faz uma solicitação AJAX para o arquivo PHP
-                $.ajax({
-                  url: '../backend/consulta_aluno.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (data) {
-                        // Adiciona cada aluno como uma opção no campo select
-                        for (var i = 0; i < data.length; i++) {
-                            $('#aluno').append($('<option>', {
-                                value: data[i].USU_CODIGO,
-                                text: data[i].USU_NOME
-                            }));
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus, errorThrown);
-                    }
-                });
+            function preencheSelectTurma() {
+            // faz uma solicitação AJAX para o arquivo PHP
+            $.ajax({
+                url: '../backend/consulta-turma.php',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                // adiciona cada turma como uma opção no campo select
+                for (var i = 0; i < data.length; i++) {
+                    $('#turma-coluna').append($('<option>', {
+                    value: data[i].TUR_CODIGO,
+                    text: data[i].TUR_SERIE
+                    }));
+                }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                }
+            });
             }
 
-            function preencheSelectFormulario() {
-                // Faz uma solicitação AJAX para o arquivo PHP
-                $.ajax({
-                    url: '../backend/consulta-formulario.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (data) {
-                        // Adiciona cada formulário como uma opção no campo select
-                        for (var i = 0; i < data.length; i++) {
-                            $('#formulario-pizza').append($('<option>', {
-                                value: data[i].FOR_CODIGO,
-                                text: data[i].FOR_TITULO
-                            }));
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus, errorThrown);
-                    }
-                });
+            function preencheSelectDisciplina() {
+            // faz uma solicitação AJAX para o arquivo PHP
+            $.ajax({
+                url: '../backend/consulta-disciplina.php',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                // adiciona cada disciplina como uma opção no campo select
+                for (var i = 0; i < data.length; i++) {
+                    $('#disciplina-coluna').append($('<option>', {
+                    value: data[i].DIS_CODIGO,
+                    text: data[i].DIS_NOME
+                    }));
+                }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                }
+            });
             }
 
             // Manipula o clique no botão "Filtrar"
-            $('#btn-filtrar-pizza').on('click', function () {
+            $('#btn-filtrar-coluna').on('click', function () {
                 // Obtenha os valores selecionados dos campos <select>
-                var alunoSelecionado = $('#aluno').val();
-                var formularioSelecionado = $('#formulario-pizza').val();
+                var turmaSelecionada = $('#turma-coluna').val();
+                var disciplinaSelecionada = $('#disciplina-coluna').val();
 
                 $.ajax({
                     type: "POST",
-                    url: "../backend/pizza-acertos.php",
+                    url: "../backend/comparativo-media.php",
                     data: {
-                        "aluno": alunoSelecionado,
-                        "formulario_pizza": formularioSelecionado
+                        "turma-coluna": turmaSelecionado,
+                        "disciplina-coluna": disciplinaSelecionada
                     },
                     //dataType: "json",
                     success: function (data) {

@@ -137,10 +137,10 @@
 
 <script>
     // Obtém o elemento do botão pelo ID
-    var btnPizza = document.getElementById("btn-linha");
+    var btnLinha = document.getElementById("btn-linha");
 
     // Adiciona um evento de clique ao botão
-    btnPizza.addEventListener("click", function() {
+    btnLinha.addEventListener("click", function() {
         // Redireciona para a página chart.php
         window.location.href = "linha-evolucao.php";
     });
@@ -151,5 +151,13 @@
     btnPizza.addEventListener("click", function() {
         // Redireciona para a página chart.php
         window.location.href = "pizza-acertos.php";
+    });
+
+    var btnColuna = document.getElementById("btn-coluna");
+
+    // Adiciona um evento de clique ao botão
+    btnColuna.addEventListener("click", function() {
+        // Redireciona para a página chart.php
+        window.location.href = "comparativo-media.php";
     });
 </script>

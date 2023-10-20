@@ -68,7 +68,7 @@ if(isset($_POST['botao-logout'])){
 <div class="print-container">
   <div id="div-fundo-grafico">
   <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home.php"></a>
-    <form id="filtro-aluno-form" >
+    <form id="filtro-form" >
           <h4 id="h4-reg-form" class="print-only">Gráfico de linhas</h4>
     
           <label id="lbl-aluno" for="aluno">Alunos:</label>
