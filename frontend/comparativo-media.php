@@ -138,100 +138,69 @@ if(isset($_POST['botao-logout'])){
             });
             }
 
-            // Manipula o clique no botão "Filtrar"
             $('#btn-filtrar-coluna').on('click', function () {
-                // Obtenha os valores selecionados dos campos <select>
-                var turmaSelecionada = $('#turma-coluna').val();
-                var disciplinaSelecionada = $('#disciplina-coluna').val();
+    var turmaSelecionada = $('#turma-coluna').val();
+    var disciplinaSelecionada = $('#disciplina-coluna').val();
 
-                $.ajax({
-                    type: "POST",
-                    url: "../backend/comparativo-media.php",
-                    data: {
-                        "turma-coluna": turmaSelecionado,
-                        "disciplina-coluna": disciplinaSelecionada
-                    },
-                    //dataType: "json",
-                    success: function (data) {
-                        if (data) {
-                            criarGrafico(data);
-                        } else {
-                            console.error("Dados inválidos ou vazios.");
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.error("Erro na solicitação AJAX:", textStatus, errorThrown);
-                        // Trate o erro, exiba uma mensagem para o usuário, etc.
-                    }
-                });
-            });
-
-            // Manipula o clique no botão "Imprimir"
-            $('#btn-imprimir').on('click', function () {
-                // Chame a função para imprimir o gráfico
-                imprimirGrafico();
-            });
-
-            function imprimirGrafico() {
-                window.print();
-            }
-
-            
-// Função para criar o gráfico
-function criarGrafico(data) {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = null;
-
-    // Verifica se já existe um gráfico e o destrói
-    if (chart !== null) {
-        chart.destroy();
-    }
-
-    var questoesCorretas = parseInt(data.questoes_corretas);
-    var questoesIncorretas = parseInt(data.total_questoes) - questoesCorretas;
-
-    chart = new Chart(ctx, {
-        type: 'doughnut',
+    $.ajax({
+        type: "POST",
+        url: "../backend/comparativo-media.php",
         data: {
-            labels: ['Questões Corretas', 'Questões Incorretas'],
-            datasets: [{
-                data: [questoesCorretas, questoesIncorretas],
-                backgroundColor: [
-                    '#33FF33',
-                    '#FF3C38'
-                ]
-            }]
+            "turma-coluna": turmaSelecionada,
+            "disciplina-coluna": disciplinaSelecionada
         },
-        options: {
-            title: {
-                display: true,
-                text: 'Desempenho no formulário',
-                fontSize: 16,
-                fontColor: 'black'
-            },
-            tooltips: {
-                callbacks: {
-                    label: function (tooltipItem, data) {
-                        var dataset = data.datasets[0];
-                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
-                            return previousValue + currentValue;
-                        });
-                        var currentValue = dataset.data[tooltipItem.index];
-                        var percent = ((currentValue / total) * 100).toFixed(2) + "%";
-
-                        if (data.labels[tooltipItem.index] === 'Questões Corretas') {
-                            return currentValue + ' acertos (' + percent + ')';
-                        } else {
-                            return currentValue + ' erros (' + percent + ')';
-                        }
-                        
-                    }
-                }
+        success: function (data) {
+            if (data.length > 0) {
+                criarGrafico(data);
+            } else {
+                console.error("Dados inválidos ou vazios.");
             }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Erro na solicitação AJAX:", textStatus, errorThrown);
         }
     });
-}
-        </script>
+});
+
+function criarGrafico(data) {
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+        var codigosAlunos = data.map(function (item) {
+            return item.USU_CODIGO;
+        });
+
+        var nomesAlunos = data.map(function (item) {
+            return item.USU_NOME;
+        });
+
+        var mediasAlunos = data.map(function (item) {
+            return item.media;
+        });
+
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: nomesAlunos,
+                datasets: [{
+                    label: 'Média',
+                    data: mediasAlunos,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Cor de fundo das barras
+                    borderColor: 'rgba(54, 162, 235, 1)', // Cor da borda das barras
+                    borderWidth: 1 // Largura da borda das barras
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+       </script>
     </div>
 </div>
 </body>

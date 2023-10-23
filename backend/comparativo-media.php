@@ -1,57 +1,30 @@
 <?php
-
 include("conexao.php");
 
 if (isset($_POST['turma-coluna']) && isset($_POST['disciplina-coluna'])) {
     $turma = $_POST['turma-coluna'];
     $disciplina = $_POST['disciplina-coluna'];
 
-    // Consulta o código do aluno
-    $consulta_aluno = "SELECT * FROM tbl_usuario WHERE TUR_SERIE = '$turma'";
-    $resultado_aluno = mysqli_query($mysqli, $consulta_aluno);
+    $consulta_media = "SELECT u.USU_CODIGO, u.USU_NOME, AVG(nf.NFO_NOTA) AS media 
+                        FROM tbl_nota_formulario nf
+                        JOIN tbl_formulario f ON nf.FOR_CODIGO = f.FOR_CODIGO
+                        JOIN tbl_disciplina d ON f.DIS_CODIGO = d.DIS_CODIGO
+                        JOIN tbl_usuario u ON nf.USU_CODIGO_CAD = u.USU_CODIGO
+                        WHERE d.DIS_NOME = '$disciplina' AND u.TUR_SERIE = '$turma'
+                        GROUP BY u.USU_CODIGO, u.USU_NOME";
 
-    if ($resultado_aluno->num_rows > 0) {
-        $row_aluno = $resultado_aluno->fetch_assoc();
-        $usuario_codigo = $row_aluno["USU_CODIGO"];
+    $data = array();
+    $result_media = mysqli_query($mysqli, $consulta_media);
 
-        // Consulta o código do formulário com base no nome
-        $consulta_formulario = "SELECT FOR_CODIGO FROM tbl_formulario WHERE FOR_TITULO = '$formulario_titulo'";
-        $resultado_formulario = mysqli_query($mysqli, $consulta_formulario);
-
-        if ($resultado_formulario->num_rows > 0) {
-            $row_formulario = $resultado_formulario->fetch_assoc();
-            $formulario_codigo = $row_formulario["FOR_CODIGO"];
-
-            // Consulta a quantidade de questões do formulário
-            $consulta_questoes = "SELECT COUNT(*) as total_questoes FROM tbl_questao WHERE FOR_CODIGO = '$formulario_codigo'";
-            $resultado_questoes = mysqli_query($mysqli, $consulta_questoes);
-            $row_questoes = $resultado_questoes->fetch_assoc();
-            $total_questoes = $row_questoes["total_questoes"];
-
-            // Consulta a quantidade de questões corretas
-            $consulta_corretas = "SELECT NFO_TOTAL_QUESTOES_CERTAS FROM tbl_nota_formulario WHERE USU_CODIGO_CAD = '$usuario_codigo' AND FOR_CODIGO = '$formulario_codigo'";
-            $resultado_corretas = mysqli_query($mysqli, $consulta_corretas);
-
-            if ($resultado_corretas) {
-                $row_corretas = mysqli_fetch_assoc($resultado_corretas);
-                $questoes_corretas = $row_corretas["NFO_TOTAL_QUESTOES_CERTAS"];
-            } else {
-                echo 'Erro na consulta.';
-            }
-
-            $resultado = array(
-                'total_questoes' => $total_questoes,
-                'questoes_corretas' => $questoes_corretas
-            );
-            header('Content-Type:application/json');
-            echo json_encode($resultado);
-            exit;
-        } else {
-            echo 'Formulário não encontrado.';
+    if ($result_media->num_rows > 0) {
+        while ($row_media = $result_media->fetch_assoc()) {
+            $data[] = $row_media;
         }
-    } else {
-        echo 'Aluno não encontrado';
     }
+
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
 } else {
     echo 'Parâmetros inválidos.';
 }
