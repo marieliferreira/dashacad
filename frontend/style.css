@@ -1081,6 +1081,36 @@ color: #00000068;
     font-size: 60px;
 }
 
+#exibe-notas-parciais{
+    border: none;
+    font-size: 20px;
+}
+
+#exibe-notas-parciais-nota{
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.espaco-entre{
+    padding-left: 535px;
+}
+
+.espaco-entre-nota{
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+#exibe-disciplina{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#exibe-nota{
+    padding-left: 550px;
+    padding-right: 15px;
+}
+
 
   
 

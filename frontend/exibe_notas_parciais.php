@@ -81,8 +81,8 @@
 
         if ($result = $mysqli->query($sql)) {
             if ($result->num_rows > 0) {
-                echo "<table border='1'>";
-                echo "<tr><th>Disciplina</th><th>Média</th></tr>";
+                echo "<table>";
+                echo "<tr id=exibe-notas-parciais><th id=exibe-notas-parciais-disciplina>Disciplina</th><th class='espaco-entre'>Média</th></tr>";
 
                 while ($row = $result->fetch_assoc()) {
                     // Obtém o nome da disciplina com base no código
@@ -95,9 +95,9 @@
                         $disciplinaNome = $disciplinaRow["DIS_NOME"];
                     }
 
-                    echo "<tr>";
-                    echo "<td>" . $disciplinaNome . "</td>";
-                    echo "<td>" . round($row["MEDIA_NOTA"], 2) . "</td>"; // Arredonda a média para duas casas decimais
+                    echo "<tr id=exibe-notas-parciais-nota>";
+                    echo "<td id='exibe-disciplina' class='espaco-entre-nota'>" . $disciplinaNome . "</td>";
+                    echo "<td id='exibe-nota' class='espaco-entre-nota'>" . round($row["MEDIA_NOTA"], 2) . "</td>"; // Arredonda a média para duas casas decimais
                     echo "</tr>";
                 }
 

@@ -160,4 +160,12 @@
         // Redireciona para a página chart.php
         window.location.href = "comparativo-media.php";
     });
+
+    var btnBarra = document.getElementById("btn-barra");
+
+    // Adiciona um evento de clique ao botão
+    btnBarra.addEventListener("click", function() {
+        // Redireciona para a página chart.php
+        window.location.href = "barra-formularios-respondidos.php";
+    });
 </script>

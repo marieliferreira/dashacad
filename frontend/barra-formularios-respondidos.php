@@ -68,16 +68,12 @@ if(isset($_POST['botao-logout'])){
     <div id="div-fundo-grafico">
         <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home.php"></a>
         <form id="filtro-form">
-            <h4 id="h4-reg-form" class="print-only">Gráfico de colunas</h4>
-            <label id="lbl-turma-coluna" for="turma-coluna">Turma:</label>
-            <select id="turma-coluna" name="turma-coluna">
-                <option value="">Selecione uma turma</option>
+            <h4 id="h4-reg-form" class="print-only">Gráfico de barra</h4>
+            <label id="lbl-disciplina-barra" for="disciplina-barra">Disciplina:</label>
+            <select id="disciplina-barra" name="disciplina-barra">
+                <option value="">Escolha a disciplina</option>
             </select>
-            <label id="lbl-disciplina-coluna" for="disciplina-coluna">Disciplina:</label>
-            <select id="disciplina-coluna" name="disciplina-coluna">
-                <option value="">Escolha uma disciplina</option>
-            </select>
-            <a id="btn-filtrar-coluna" class="no-print" type="button">Filtrar</a>
+            <a id="btn-filtrar-barra" class="no-print" type="button">Filtrar</a>
         </form>
         <button id="btn-imprimir" class="no-print" type="button">Imprimir Gráfico</button>
         <div>
@@ -92,30 +88,8 @@ if(isset($_POST['botao-logout'])){
         <script>
             $(document).ready(function () {
                 // Chama a função ao carregar a página
-                preencheSelectTurma();
                 preencheSelectDisciplina();
             });
-
-            function preencheSelectTurma() {
-            // faz uma solicitação AJAX para o arquivo PHP
-            $.ajax({
-                url: '../backend/consulta-turma.php',
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                // adiciona cada turma como uma opção no campo select
-                for (var i = 0; i < data.length; i++) {
-                    $('#turma-coluna').append($('<option>', {
-                    value: data[i].TUR_CODIGO,
-                    text: data[i].TUR_SERIE
-                    }));
-                }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-                }
-            });
-            }
 
             function preencheSelectDisciplina() {
             // faz uma solicitação AJAX para o arquivo PHP
@@ -126,7 +100,7 @@ if(isset($_POST['botao-logout'])){
                 success: function(data) {
                 // adiciona cada disciplina como uma opção no campo select
                 for (var i = 0; i < data.length; i++) {
-                    $('#disciplina-coluna').append($('<option>', {
+                    $('#disciplina-barra').append($('<option>', {
                     value: data[i].DIS_CODIGO,
                     text: data[i].DIS_NOME
                     }));
@@ -138,80 +112,76 @@ if(isset($_POST['botao-logout'])){
             });
             }
 
-            $('#btn-filtrar-coluna').on('click', function () {
-    var turmaSelecionada = $('#turma-coluna').val();
-    var disciplinaSelecionada = $('#disciplina-coluna').val();
+            $('#btn-filtrar-barra').on('click', function () {
+    var disciplinaSelecionada = $('#disciplina-barra').val();
 
     $.ajax({
         type: "POST",
-        url: "../backend/comparativo-media.php",
+        url: "../backend/disciplina-barra.php",
         data: {
-            "turma-coluna": turmaSelecionada,
-            "disciplina-coluna": disciplinaSelecionada
+            "disciplina_barra": disciplinaSelecionada
         },
         success: function (data) {
-            if (data.length > 0) {
-                criarGrafico(data);
+            if (data) {
+                // Crie um gráfico de barras com os dados recebidos do PHP
+                criarGraficoBarras(data);
             } else {
                 console.error("Dados inválidos ou vazios.");
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.error("Erro na solicitação AJAX:", textStatus, errorThrown);
+            // Trate o erro, exiba uma mensagem para o usuário, etc.
         }
     });
 });
 
-function criarGrafico(data) {
-    var ctx = document.getElementById('myChart').getContext('2d');
+function criarGraficoBarras(data) {
+    // Os dados retornados do PHP devem ser um array associativo com os códigos de formulário e a quantidade de respostas
+    var codigosFormulario = [];
+    var totalRespostas = [];
 
-        var codigosAlunos = data.map(function (item) {
-            return item.USU_CODIGO;
-        });
-
-        var nomesAlunos = data.map(function (item) {
-            return item.USU_NOME;
-        });
-
-        var mediasAlunos = data.map(function (item) {
-            return item.media;
-        });
-
-        var chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: nomesAlunos,
-                datasets: [{
-                    label: 'Média',
-                    data: mediasAlunos,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Cor de fundo das barras
-                    borderColor: 'rgba(54, 162, 235, 1)', // Cor da borda das barras
-                    borderWidth: 1 // Largura da borda das barras
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
+    for (var i = 0; i < data.length; i++) {
+        codigosFormulario.push(data[i].FOR_CODIGO);
+        totalRespostas.push(data[i].total_respostas);
     }
 
-     // Manipula o clique no botão "Imprimir"
-     $('#btn-imprimir').on('click', function () {
-            // Chame a função para imprimir o gráfico
-            imprimirGrafico();
-        });
-
-        function imprimirGrafico() {
-            window.print();
+    // Crie um gráfico de barras usando a biblioteca Chart.js
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: codigosFormulario,
+            datasets: [{
+                label: 'Total de Respostas',
+                data: totalRespostas,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
+                borderColor: 'rgba(75, 192, 192, 1)', // Cor da borda das barras
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-        
-       </script>
+    });
+}
+
+            // Manipula o clique no botão "Imprimir"
+            $('#btn-imprimir').on('click', function () {
+                // Chame a função para imprimir o gráfico
+                imprimirGrafico();
+            });
+
+            function imprimirGrafico() {
+                window.print();
+            }
+
+            
+        </script>
     </div>
 </div>
 </body>
