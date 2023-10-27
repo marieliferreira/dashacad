@@ -1096,14 +1096,9 @@ color: #00000068;
     padding-left: 535px;
 }
 
-.espaco-entre-nota{
-    border: 1px solid #ccc;
-    text-align: center;
-}
 
 #exibe-disciplina{
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 300px;
 }
 
 #exibe-nota{
@@ -1111,6 +1106,11 @@ color: #00000068;
     padding-right: 15px;
 }
 
+#id-acessar{
+    color: #FFFFFF;
+    padding-left: 240px;
+    text-decoration: none;
+}
 
   
 

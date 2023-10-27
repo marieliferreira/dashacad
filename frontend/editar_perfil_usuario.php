@@ -21,17 +21,20 @@
         $nome_usuario = $_SESSION['nome'];
         $email_usuario = $_SESSION['email'];
         $foto_usuario = $_SESSION['foto'];
+        $senha_usuario = $_SESSION['senha'];
     }
 
     if(isset($_POST['botao-salvar'])){
         // Obtenha os dados do formulário
         $novo_nome = $_POST['novo-nome'];
         $novo_email = $_POST['novo-email'];
+        $novo_email = $_POST['nova-senha'];
         // Atualize os dados no banco de dados (você precisará implementar essa lógica)
         
         // Atualize as informações na sessão
         $_SESSION['nome'] = $novo_nome;
         $_SESSION['email'] = $novo_email;
+        $_SESSION['senha'] = $nova_senha;
         // Redirecione o usuário de volta para a página de perfil
         header("Location: perfil.php");
     }
@@ -47,6 +50,10 @@
         <div class="mb-3">
             <label for="novo-email" class="form-label">Novo Email:</label>
             <input type="email" class="form-control" id="novo-email" name="novo-email" value="<?php echo $email_usuario; ?>">
+        </div>
+        <div class="mb-3">
+            <label for="novo-email" class="form-label">Nova Senha:</label>
+            <input type="password" class="form-control" id="nova-senha" name="nova-senha" value="<?php echo $email_usuario; ?>">
         </div>
         <!-- Adicione mais campos conforme necessário -->
         <button type="submit" class="btn btn-primary" name="botao-salvar">Salvar</button>

@@ -72,21 +72,21 @@
           </svg>
             <h4 class="text-center" id="h4-formulario">Formulários</h4>
             <div>
-            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_formulario_aluno.php">Acessar</a>
+            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_formulario_aluno.php">Acessar &rarr;</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-respondidos" >
             <i class="fas fa-check-square text-center"></i>
             <h4 class="text-center" id="h4-respondidos">Respondidos</h4>
             <div>
-            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_formularios_respondidos.php">Acessar</a>
+            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_formularios_respondidos.php">Acessar &rarr;</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-nparciais" >
           <i class="fas fa-graduation-cap text-center"></i>
             <h4 class="text-center" id="h4-notas-parciais">Notas Parciais</h4>
             <div>
-            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_notas_parciais.php">Acessar</a>
+            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_notas_parciais.php">Acessar &rarr;</a>
             </div>
           </div>
         </div>
@@ -95,21 +95,21 @@
           <i class="fas fa-calendar text-center"></i>
             <h4 class="text-center" id="h4-agenda">Agenda</h4>
             <div>
-            <a id="id-acessar" class="class-acessar" href="https://workspace.google.com/intl/pt-BR/products/calendar/" target="_blank">Acessar</a>
+            <a id="id-acessar" class="class-acessar" href="https://workspace.google.com/intl/pt-BR/products/calendar/" target="_blank">Acessar &rarr;</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-respondidos" >
             <i class="fas fa-book text-center"></i>
             <h4 class="text-center" id="h4-disciplinas">Disciplinas</h4>
             <div>
-            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_disciplina.php">Acessar</a>
+            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_disciplina.php">Acessar &rarr;</a>
             </div>
           </div>
           <div class="menu-aluno col" id="menu-aluno-nparciais" >
             <i class="fas fa-user text-center"></i>
             <h4 class="text-center" id="h4-perfil">Perfil</h4>
             <div>
-            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_perfil_usuario.php">Acessar</a>
+            <a id="id-acessar" class="class-acessar" href="../frontend/exibe_perfil_usuario.php">Acessar &rarr;</a>
             </div>
           </div>
         </div>
