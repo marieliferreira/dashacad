@@ -119,10 +119,11 @@ if(isset($_POST['botao-logout'])){
         type: "POST",
         url: "../backend/disciplina-barra.php",
         data: {
-            "disciplina_barra": disciplinaSelecionada
+            "disciplina-barra": disciplinaSelecionada
         },
         success: function (data) {
-            if (data) {
+            if (data.length > 0) {
+                console.log(data);
                 // Crie um gráfico de barras com os dados recebidos do PHP
                 criarGraficoBarras(data);
             } else {
@@ -137,23 +138,22 @@ if(isset($_POST['botao-logout'])){
 });
 
 function criarGraficoBarras(data) {
-    // Os dados retornados do PHP devem ser um array associativo com os códigos de formulário e a quantidade de respostas
     var codigosFormulario = [];
     var totalRespostas = [];
 
     for (var i = 0; i < data.length; i++) {
-        codigosFormulario.push(data[i].FOR_CODIGO);
+        codigosFormulario.push("Formulário" + data[i].FOR_TITULO);
         totalRespostas.push(data[i].total_respostas);
     }
 
     // Crie um gráfico de barras usando a biblioteca Chart.js
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
-        type: 'bar',
+        type: 'horizontalBar',
         data: {
             labels: codigosFormulario,
             datasets: [{
-                label: 'Total de Respostas',
+                label: 'Quantidade de Usuários que Responderam',
                 data: totalRespostas,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
                 borderColor: 'rgba(75, 192, 192, 1)', // Cor da borda das barras
@@ -162,7 +162,7 @@ function criarGraficoBarras(data) {
         },
         options: {
             scales: {
-                y: {
+                x: {
                     beginAtZero: true
                 }
             }
