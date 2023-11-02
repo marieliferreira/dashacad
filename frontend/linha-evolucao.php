@@ -161,8 +161,7 @@ if(isset($_POST['botao-logout'])){
         }
 
         });
-        // Função para criar o gráfico
-        // Função para criar o gráfico
+        
 // Função para criar o gráfico
 function criarGrafico(formulario, nota) {
     var ctx = document.getElementById('myChart').getContext('2d');

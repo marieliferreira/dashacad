@@ -7,6 +7,9 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chart.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="script.js"></script>
     <title>DashAcad</title>
 </head>
 <?php
@@ -89,38 +92,44 @@
                 <path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z"/></svg></a> </button>
             </li>
           </ul>
-          <button onclick="window.location.href = 'formulario.php';"  id="btn-criar-form">Criar formulário <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#023D54" class="bi bi-plus-lg" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-            </svg></button>
-        <h5 id="graficos">Gráficos</h4>
-        <div class="container text-center">
-            <div class="row align-items-start" id="btn-deslizar">
-              <div class="col" >
-                  <button id="btn-pizza">
-                      <img id="img-btn-pizza" src="imagens/pizza.png" alt="imagem do botão gráfico-pizza">
+            </div>
+            <div id="body-home">
+              <button onclick="window.location.href = 'formulario.php';"  id="btn-criar-form">Criar formulário <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#023D54" class="bi bi-plus-lg" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+              </svg></button>
+                      <h5 id="graficos">Gráficos</h4>
+                      <div class="container text-center">
+              <div class="row align-items-start" id="btn-deslizar">
+                <div class="col" >
+                    <button id="btn-pizza">
+                        <img id="img-btn-pizza" src="imagens/pizza.png" alt="imagem do botão gráfico-pizza">
+                    </button>
+                    <label id="lbl-pizza" for="btn-pizza">Pizza</label>
+                </div>
+                <div class="col">
+                  <button id="btn-linha">
+                      <img id="img-btn-linha" src="imagens/linha.png" alt="imagem do botão gráfico-linha">
                   </button>
-                  <label id="lbl-pizza" for="btn-pizza">Pizza</label>
-              </div>
-              <div class="col">
-                <button id="btn-linha">
-                    <img id="img-btn-linha" src="imagens/linha.png" alt="imagem do botão gráfico-linha">
-                </button>
-                <label id="lbl-linha" for="">Linha</label>
-              </div>
-              <div class="col">
-                <button id="btn-coluna">
-                    <img id="img-btn-coluna" src="imagens/colunas.png" alt="imagem do botão gráfico-coluna">
-                </button>
-                <label id="lbl-coluna" for="">Colunas</label>
-              </div>
-              <div class="col">
-                <button id="btn-barra">
-                    <img id="img-btn-barra" src="imagens/barras.png" alt="imagem do botão gráfico-barra">
-                </button>
-                <label id="lbl-barra" for="">Barras</label>
-              </div>
+                  <label id="lbl-linha" for="">Linha</label>
+                </div>
+                <div class="col">
+                  <button id="btn-coluna">
+                      <img id="img-btn-coluna" src="imagens/colunas.png" alt="imagem do botão gráfico-coluna">
+                  </button>
+                  <label id="lbl-coluna" for="">Colunas</label>
+                </div>
+                <div class="col">
+                  <button id="btn-barra">
+                      <img id="img-btn-barra" src="imagens/barras.png" alt="imagem do botão gráfico-barra">
+                  </button>
+                  <label id="lbl-barra" for="">Barras</label>
+                </div>
             </div>
         </div>
+    </div>
+    <div id="div-branca-grafico">
+            <div id="div-azul-grafico"><h6>Quantidade de alunos por turma</h6></div>
+            <canvas id="quant-aluno"></canvas>
     </div>
     <footer class="rodape-tela-principal">
       <center>
@@ -130,12 +139,8 @@
       </center>
     </footer>
 
-</body>
-</html>
+    <script>
 
-<script src="script.js" ></script>
-
-<script>
     // Obtém o elemento do botão pelo ID
     var btnLinha = document.getElementById("btn-linha");
 
@@ -168,4 +173,51 @@
         // Redireciona para a página chart.php
         window.location.href = "barra-formularios-respondidos.php";
     });
-</script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obtenha o contexto do canvas
+            var ctx = document.getElementById('quant-aluno').getContext('2d');
+
+            // Faça uma solicitação AJAX para obter os dados do servidor
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "../backend/quant-aluno.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var dados = JSON.parse(xhr.responseText);
+                    
+                    // Extrai os nomes das turmas e a quantidade de alunos em cada turma
+                    var turmas = dados.map(function(item) {
+                        return item.TUR_SERIE;
+                    });
+                    var quantidadeAlunos = dados.map(function(item) {
+                        return item.quantidade_alunos;
+                    });
+
+                    // Criação do gráfico
+                    var chart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: turmas,
+                            datasets: [{
+                                label: 'Quantidade de Alunos por Turma',
+                                data: quantidadeAlunos,
+                                backgroundColor: ['rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)', 'rgba(0, 0, 255, 0.5)', 'rgba(255, 165, 0, 0.5)'],
+                                borderColor: ['rgba(0, 255, 0, 1)', 'rgba(255, 0, 0, 1)', 'rgba(0, 0, 255, 1)', 'rgba(255, 165, 0, 1)'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>

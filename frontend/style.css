@@ -592,13 +592,18 @@ p{
 }
 
 .menu-vertical{
-    position: relative;
+    position: fixed;
     float: left;
     top: 50px;
     background-color: #FFFFFF;
     width: 250px;
     height: 605px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#body-home{
+    position: absolute;
+    top: 50px;
 }
 
 .flex-column{
@@ -928,7 +933,7 @@ color: #00000068;
 
 .rodape-tela-principal{
     position: absolute;
-    top: 600px;
+    top: 900px;
     left: 760px;
 }
 
