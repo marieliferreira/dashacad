@@ -552,10 +552,28 @@ p{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.img-fluid {
+#img-fluid-usuario{
+    position: absolute;
+    top: -1px;
+    height: 40px;
+    width: 45px;
+    margin-left: 40px;
+    margin-top: 5px;
+}
+
+#img-fluid-logo {
+    position: absolute;
+    top: -1px;
+    left: 630px;
     height: 40px;
     margin-left: 30px;
     margin-top: 5px;
+}
+
+.botao-logout{
+    position: absolute;
+    top: 5px;
+    left: 1000px;
 }
 
 .col-sm-4 {
@@ -570,12 +588,18 @@ p{
 }
 
 #nome-usuario{
+    position: absolute;
+    top: 2px;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-bottom: -10px;
 }
 
 #email-usuario{
+    position: absolute;
+    top: 24px;
     font-size: 12px;
+    margin-left: 10px;
 }
 
 
@@ -942,6 +966,21 @@ color: #00000068;
     width: 585px;
 }
 
+.menu-oculto {
+    display: none;
+}
+
+#btn-hamburguer{
+    background-color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+}
+
+#btn-hamburguer:hover {
+    background-color: #ececec;
+}
 
 .menu-vertical-formulario{
     position: relative;

@@ -33,15 +33,14 @@
 
 ?>
 <body>
-    <div class="cabecalho-branco-home">
-
-
+<div class="cabecalho-branco-home">
+<span><button id="btn-hamburguer" onclick="toggleMenu()">&#9776;</button></span>
         <div class="container-fluid">
             <div class="row col-md-12">
               <div class="col-sm-4">
                 <div class="row">
                   <div class="col-sm-4 div-foto-perfil">
-                    <img src = <?php echo "'" . $foto_usuario . "'";?> alt="Foto do perfil" class="img-fluid rounded-circle" >
+                    <img src = <?php echo "'" . $foto_usuario . "'";?> alt="Foto do perfil" id="img-fluid-usuario" class="img-fluid rounded-circle" >
                   </div>
                     <div class="col-sm-8">
                       <h6 id="nome-usuario"><?php echo $nome_usuario;?></h6>
@@ -50,7 +49,7 @@
                 </div>
               </div>
               <div class="col-sm-4 text-center">
-                <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" class="img-fluid">
+                <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" id="img-fluid-logo" class="img-fluid">
               </div>
               <div class="col-sm-4 text-right botao-logout">
                     <a href="login.html"><svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor"      class="bi bi-box-arrow-right" viewBox="0 0 16 16">

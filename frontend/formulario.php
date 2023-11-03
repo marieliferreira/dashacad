@@ -47,36 +47,35 @@
   
   ?>
   <body>
-      <div class="cabecalho-branco-home">
-  
-  
-          <div class="container-fluid">
-              <div class="row col-md-12">
-                <div class="col-sm-4">
-                  <div class="row">
-                    <div class="col-sm-4 div-foto-perfil">
-                      <img src = <?php echo "'" . $foto_usuario . "'";?> alt="Foto do perfil" class="img-fluid rounded-circle" >
-                    </div>
-                      <div class="col-sm-8">
-                        <h6 id="nome-usuario"><?php echo $nome_usuario;?></h6>
-                        <p id="email-usuario"><?php echo $email_usuario;?></p>
-                      </div>
+  <div class="cabecalho-branco-home">
+<span><button id="btn-hamburguer" onclick="toggleMenu()">&#9776;</button></span>
+        <div class="container-fluid">
+            <div class="row col-md-12">
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-4 div-foto-perfil">
+                    <img src = <?php echo "'" . $foto_usuario . "'";?> alt="Foto do perfil" id="img-fluid-usuario" class="img-fluid rounded-circle" >
                   </div>
-                </div>
-                <div class="col-sm-4 text-center">
-                  <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" class="img-fluid">
-                </div>
-                <div class="col-sm-4 text-right botao-logout">
-                      <a href=""><svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor"      class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></a>
-                  </svg>
+                    <div class="col-sm-8">
+                      <h6 id="nome-usuario"><?php echo $nome_usuario;?></h6>
+                      <p id="email-usuario"><?php echo $email_usuario;?></p>
+                    </div>
                 </div>
               </div>
+              <div class="col-sm-4 text-center">
+                <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" id="img-fluid-logo" class="img-fluid">
+              </div>
+              <div class="col-sm-4 text-right botao-logout">
+                    <a href="login.html"><svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor"      class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                      <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></a>
+                </svg>
+              </div>
             </div>
-            
-      </div>
-      <div class="menu-vertical">
+          </div>
+          
+    </div>
+      <div class="menu-vertical menu-oculto">
           <ul class="nav flex-column">
               <li class="nav-item">
                   <button id="btn-turma" onclick="exibirCadastrarTurma()">Turmas<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16" style="margin: 0 0 0 5px;"> 
@@ -179,6 +178,12 @@
   </div>
 
   <script>
+    function toggleMenu() {
+      var menuVertical = document.querySelector(".menu-vertical");
+      menuVertical.classList.toggle("menu-oculto");
+    }
+
+
     $(document).ready(function() {
       // chama a função ao carregar a página
       preencheSelectDisciplina();
