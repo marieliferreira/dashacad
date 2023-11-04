@@ -623,6 +623,7 @@ p{
     width: 250px;
     height: 605px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
 }
 
 #body-home{
@@ -837,7 +838,7 @@ color: #00000068;
     position: absolute;
     width: 77px;
     height: 27px;
-    left: 300px;
+    left: 110px;
     top: 150px;
     font-family: 'Nunito';
     font-style: normal;
@@ -849,9 +850,9 @@ color: #00000068;
 #btn-pizza{
     box-sizing: border-box;
     position: absolute;
-    width: 200px;
+    width: 250px;
     height: 60px;
-    left: 300px;
+    left: 105px;
     top: 200px;
     border: 2px solid #023D54;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -866,9 +867,9 @@ color: #00000068;
 #btn-linha{
     box-sizing: border-box;
     position: absolute;
-    width: 200px;
+    width: 250px;
     height: 60px;
-    left: 570px;
+    left: 410px;
     top: 200px;
     border: 2px solid #023D54;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -883,9 +884,9 @@ color: #00000068;
 #btn-coluna{
     box-sizing: border-box;
     position: absolute;
-    width: 200px;
+    width: 250px;
     height: 60px;
-    left: 840px;
+    left: 705px;
     top: 200px;
     border: 2px solid #023D54;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -900,9 +901,9 @@ color: #00000068;
 #btn-barra{
     box-sizing: border-box;
     position: absolute;
-    width: 200px;
+    width: 250px;
     height: 60px;
-    left: 1100px;
+    left: 1000px;
     top: 200px;
     border: 2px solid #023D54;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -918,7 +919,7 @@ color: #00000068;
 #lbl-pizza{
     position: absolute;
     top: 270px;
-    left: 380px;
+    left: 210px;
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 400;
@@ -928,7 +929,7 @@ color: #00000068;
 #lbl-linha{
     position: absolute;
     top: 270px;
-    left: 650px;
+    left: 512px;
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 400;
@@ -938,7 +939,7 @@ color: #00000068;
 #lbl-coluna{
     position: absolute;
     top: 270px;
-    left: 910px;
+    left: 800px;
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 400;
@@ -948,7 +949,7 @@ color: #00000068;
 #lbl-barra{
     position: absolute;
     top: 270px;
-    left: 1180px;
+    left: 1100px;
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 400;
@@ -981,6 +982,18 @@ color: #00000068;
 #btn-hamburguer:hover {
     background-color: #ececec;
 }
+
+#menu-div-transparente{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Defina a cor de fundo com transparência */
+    z-index: 999; /* Defina um valor alto para z-index para garantir que fique no topo de tudo */
+    display: none; /* Comece com a div oculta */
+}
+
 
 .menu-vertical-formulario{
     position: relative;

@@ -349,7 +349,63 @@ td{
   position: absolute;
   width: 400px;
   height: 41px;
-  left: 470px;
+  left: 300px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-pizza{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 500px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-linha{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 485px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-coluna{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 480px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-barra{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 480px;
   top: 30px;
   font-family: 'Nunito';
   font-style: normal;
@@ -794,4 +850,40 @@ td{
     top: 100px;
     border: 1px solid #023D54;
     border-radius: 10px;
+}
+
+#lbl-disciplina-barra{
+  position: absolute;
+  width: 65px;
+  height: 27px;
+  left: 80px;
+  top: 100px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  color: #023D54;
+}
+
+#disciplina-barra{
+  position: absolute;
+  width: 170px;
+  height: 30px;
+  left: 180px;
+  top: 100px;
+  border: 1px solid #023D54;
+  border-radius: 10px;
+}
+
+#btn-filtrar-barra{
+  position: absolute;
+  text-decoration: underline;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #023D54;
+  top: 100px;
+  left: 360px;
+  width: 50px;
+  height: 40px;
 }

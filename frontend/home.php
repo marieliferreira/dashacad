@@ -95,44 +95,44 @@
             </li>
           </ul>
             </div>
-            <div id="body-home">
-              <button onclick="window.location.href = 'formulario.php';"  id="btn-criar-form">Criar formulário <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#023D54" class="bi bi-plus-lg" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-              </svg></button>
-                      <h5 id="graficos">Gráficos</h4>
-                      <div class="container text-center">
-              <div class="row align-items-start" id="btn-deslizar">
-                <div class="col" >
-                    <button id="btn-pizza">
-                        <img id="img-btn-pizza" src="imagens/pizza.png" alt="imagem do botão gráfico-pizza">
+              <div id="body-home">
+                <button onclick="window.location.href = 'formulario.php';"  id="btn-criar-form">Criar formulário <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#023D54" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                </svg></button>
+                        <h5 id="graficos">Gráficos</h4>
+                        <div class="container text-center">
+                <div class="row align-items-start" id="btn-deslizar">
+                  <div class="col" >
+                      <button id="btn-pizza">
+                          <img id="img-btn-pizza" src="imagens/pizza.png" alt="imagem do botão gráfico-pizza">
+                      </button>
+                      <label id="lbl-pizza" for="btn-pizza">Pizza</label>
+                  </div>
+                  <div class="col">
+                    <button id="btn-linha">
+                        <img id="img-btn-linha" src="imagens/linha.png" alt="imagem do botão gráfico-linha">
                     </button>
-                    <label id="lbl-pizza" for="btn-pizza">Pizza</label>
-                </div>
-                <div class="col">
-                  <button id="btn-linha">
-                      <img id="img-btn-linha" src="imagens/linha.png" alt="imagem do botão gráfico-linha">
-                  </button>
-                  <label id="lbl-linha" for="">Linha</label>
-                </div>
-                <div class="col">
-                  <button id="btn-coluna">
-                      <img id="img-btn-coluna" src="imagens/colunas.png" alt="imagem do botão gráfico-coluna">
-                  </button>
-                  <label id="lbl-coluna" for="">Colunas</label>
-                </div>
-                <div class="col">
-                  <button id="btn-barra">
-                      <img id="img-btn-barra" src="imagens/barras.png" alt="imagem do botão gráfico-barra">
-                  </button>
-                  <label id="lbl-barra" for="">Barras</label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="div-branca-grafico">
-            <div id="div-azul-grafico"><h6>Quantidade de alunos por turma</h6></div>
-            <canvas id="quant-aluno"></canvas>
-    </div>
+                    <label id="lbl-linha" for="">Linha</label>
+                  </div>
+                  <div class="col">
+                    <button id="btn-coluna">
+                        <img id="img-btn-coluna" src="imagens/colunas.png" alt="imagem do botão gráfico-coluna">
+                    </button>
+                    <label id="lbl-coluna" for="">Colunas</label>
+                  </div>
+                  <div class="col">
+                    <button id="btn-barra">
+                        <img id="img-btn-barra" src="imagens/barras.png" alt="imagem do botão gráfico-barra">
+                    </button>
+                    <label id="lbl-barra" for="">Barras</label>
+                  </div>
+              </div>
+                      </div>
+                  </div>
+                  <div id="div-branca-grafico">
+              <div id="div-azul-grafico"><h6>Quantidade de alunos por turma</h6></div>
+              <canvas id="quant-aluno"></canvas>
+                  </div>
     <footer class="rodape-tela-principal">
       <center>
         <p class="rodape-texto-tela-principal"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16" style="margin: 0 5px 0 0;" >
@@ -141,7 +141,30 @@
       </center>
     </footer>
 
+    <div id="menu-div-transparente"></div>
+
     <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtém o botão hamburguer pelo ID
+    var btnHamburguer = document.getElementById("btn-hamburguer");
+    
+    // Obtém a div transparente pelo ID
+    var divTransparente = document.getElementById("menu-div-transparente");
+    
+    // Adiciona um evento de clique ao botão hamburguer
+    btnHamburguer.addEventListener("click", function() {
+        // Verifica o estado atual da div transparente
+        if (divTransparente.style.display === "block") {
+            // Se estiver visível, oculta a div
+            divTransparente.style.display = "none";
+        } else {
+            // Se estiver oculta, mostra a div
+            divTransparente.style.display = "block";
+        }
+    });
+});
+
 
     function toggleMenu() {
       var menuVertical = document.querySelector(".menu-vertical");
