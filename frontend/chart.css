@@ -35,7 +35,7 @@
     }
 }
 
-#div-branca-grafico{
+#div-branca-grafico-quant-aluno{
     position: absolute;
     background-color: #ffffff;
     width: 400px;
@@ -46,7 +46,30 @@
     border: 1px solid #023D54;
 }
 
-#div-azul-grafico{
+#div-azul-grafico-quant-aluno{
+    background-color: #023D54;
+    border-radius: 5px 5px 0px 0px;
+    width: 400px;
+    height: 60px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+#div-branca-grafico-media-turma{
+    position: absolute;
+    background-color: #ffffff;
+    width: 400px;
+    height: 350px;
+    left: 850px;
+    top: 450px;
+    border-radius: 5px;
+    border: 1px solid #023D54;
+}
+
+#div-azul-grafico-media-turma{
     background-color: #023D54;
     border-radius: 5px 5px 0px 0px;
     width: 400px;

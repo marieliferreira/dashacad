@@ -129,10 +129,15 @@
               </div>
                       </div>
                   </div>
-                  <div id="div-branca-grafico">
-              <div id="div-azul-grafico"><h6>Quantidade de alunos por turma</h6></div>
-              <canvas id="quant-aluno"></canvas>
+                  <div id="div-branca-grafico-quant-aluno">
+                  <div id="div-azul-grafico-quant-aluno"><h6>Quantidade de alunos por turma</h6></div>
+                  <canvas id="quant-aluno"></canvas>
                   </div>
+                  <div id="div-branca-grafico-media-turma">
+                  <div id="div-azul-grafico-media-turma"><h6>Comparativo de média por turma</h6></div>
+                  <canvas id="media-turma"></canvas>
+                  </div>
+                  
     <footer class="rodape-tela-principal">
       <center>
         <p class="rodape-texto-tela-principal"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16" style="margin: 0 5px 0 0;" >
@@ -204,6 +209,20 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "barra-formularios-respondidos.php";
     });
 
+    var coresVivas = [
+      'rgba(255, 0, 0, 0.5)',     // Vermelho
+      'rgba(0, 255, 0, 0.5)',     // Verde
+      'rgba(0, 0, 255, 0.5)',     // Azul
+      'rgba(255, 165, 0, 0.5)',   // Laranja
+      'rgba(255, 215, 0, 0.5)',   // Amarelo
+      'rgba(128, 0, 128, 0.5)',   // Roxo
+      'rgba(0, 128, 128, 0.5)',   // Verde-azulado
+      'rgba(255, 69, 0, 0.5)',    // Vermelho-alaranjado
+      'rgba(0, 128, 0, 0.5)',     // Verde Escuro
+    ];
+
+
+
         document.addEventListener("DOMContentLoaded", function() {
             // Obtenha o contexto do canvas
             var ctx = document.getElementById('quant-aluno').getContext('2d');
@@ -231,8 +250,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             datasets: [{
                                 label: 'Quantidade de Alunos por Turma',
                                 data: quantidadeAlunos,
-                                backgroundColor: ['rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)', 'rgba(0, 0, 255, 0.5)', 'rgba(255, 165, 0, 0.5)'],
-                                borderColor: ['rgba(0, 255, 0, 1)', 'rgba(255, 0, 0, 1)', 'rgba(0, 0, 255, 1)', 'rgba(255, 165, 0, 1)'],
+                                backgroundColor: coresVivas,
+                                borderColor: coresVivas,
                                 borderWidth: 1
                             }]
                         },
@@ -248,6 +267,51 @@ document.addEventListener("DOMContentLoaded", function() {
             };
             xhr.send();
         });
+        document.addEventListener("DOMContentLoaded", function() {
+        // Obtenha o contexto do canvas
+        var ctx = document.getElementById('media-turma').getContext('2d');
+
+        // Faça uma solicitação AJAX para obter os dados da média por turma do seu backend
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "../backend/media-turma.php", true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var dados = JSON.parse(xhr.responseText);
+            console.log(dados); // Adicione esta linha para depurar os dados recebidos
+
+            // Extrai os nomes das turmas e as médias em cada turma
+            var turmas = dados.map(function(item) {
+                return item.Turma;
+            });
+            var medias = dados.map(function(item) {
+                return item.MediaNotaTurma;
+            });
+
+            // Criação do gráfico de barras
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: turmas,
+                    datasets: [{
+                        label: 'Média por Turma',
+                        data: medias,
+                        backgroundColor: 'rgba(0, 0, 255, 0.5)',
+                        borderColor: 'rgba(0, 0, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    };
+    xhr.send();
+});
     </script>
 </body>
 </html>
