@@ -137,6 +137,10 @@
                   <div id="div-azul-grafico-media-turma"><h6>Comparativo de média por turma</h6></div>
                   <canvas id="media-turma"></canvas>
                   </div>
+                  <div id="div-branca-grafico-participacao-disciplina">
+                  <div id="div-azul-grafico-participacao-disciplina"><h6>Engajamento dos alunos por disciplina</h6></div>
+                  <canvas id="participacao-disciplina"></canvas>
+                  </div>
                   
     <footer class="rodape-tela-principal">
       <center>
@@ -312,6 +316,90 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     xhr.send();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    var ctxBarras = document.getElementById('participacao-disciplina').getContext('2d');
+
+    var xhrBarras = new XMLHttpRequest();
+    xhrBarras.open("GET", "../backend/participacao_disciplina.php", true);
+    xhrBarras.onreadystatechange = function () {
+        if (xhrBarras.readyState == 4 && xhrBarras.status == 200) {
+            var dadosBarras = JSON.parse(xhrBarras.responseText);
+
+            // Rótulos fixos do eixo y
+            var rotulosEixoY = Array.from({ length: 10 }, (_, index) => (index + 1) * 10);
+
+            var disciplinas = dadosBarras.map(function (item) {
+                return item.Disciplina;
+            });
+            var porcentagensParticipacao = dadosBarras.map(function (item) {
+                return item.PorcentagemParticipacao;
+            });
+
+            // Use cores diferentes para cada barra
+            var coresBarras = gerarCoresUnicas(disciplinas.length);
+
+            var chartBarras = new Chart(ctxBarras, {
+                type: 'horizontalBar',
+                data: {
+                    labels: disciplinas,
+                    datasets: [{
+                        label: 'Porcentagem de Participação',
+                        data: porcentagensParticipacao,
+                        backgroundColor: coresBarras,
+                        borderColor: coresBarras,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 120
+                        },
+                        y: {
+                            labels: {
+                                // Rótulos do eixo y
+                                callback: function (value, index, values) {
+                                    return rotulosEixoY[index] + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'end',
+                            formatter: function (value, context) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    };
+    xhrBarras.send();
+});
+
+
+// Função para gerar cores únicas
+function gerarCoresUnicas(quantidade) {
+    var cores = [];
+    for (var i = 0; i < quantidade; i++) {
+        // Gere cores RGB aleatórias
+        var cor = 'rgba(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ', 0.5)';
+        cores.push(cor);
+    }
+    return cores;
+}
+
+
+
+
+
+
     </script>
 </body>
 </html>
+
