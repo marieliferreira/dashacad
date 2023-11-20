@@ -104,3 +104,25 @@
     margin-bottom: 30px;
 }
 
+#div-branca-grafico-evolucao-disciplina{
+    position: absolute;
+    background-color: #ffffff;
+    width: 500px;
+    height: 350px;
+    left: 750px;
+    top: 850px;
+    border-radius: 5px;
+    border: 1px solid #023D54;
+    
+}
+
+#div-azul-grafico-evolucao-disciplina{
+    background-color: #023D54;
+    border-radius: 5px 5px 0px 0px;
+    width: 500px;
+    height: 60px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}

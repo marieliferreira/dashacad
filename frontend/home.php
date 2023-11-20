@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chart.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
     <script src="script.js"></script>
     <title>DashAcad</title>
 </head>
@@ -34,9 +36,6 @@
 
 ?>
 <body>
-
-    
-
     <div class="cabecalho-branco-home">
 <span><button id="btn-hamburguer" onclick="toggleMenu()">&#9776;</button></span>
         <div class="container-fluid">
@@ -137,11 +136,15 @@
                   <div id="div-azul-grafico-media-turma"><h6>Comparativo de média por turma</h6></div>
                   <canvas id="media-turma"></canvas>
                   </div>
+                  <div id="div-branca-grafico-evolucao-disciplina">
+                  <div id="div-azul-grafico-evolucao-disciplina"><h6>Evolução da Média por Disciplina</h6></div>
+                  <canvas id="evolucao-disciplina"></canvas>
+                  </div>
                   <div id="div-branca-grafico-participacao-disciplina">
                   <div id="div-azul-grafico-participacao-disciplina"><h6>Engajamento dos alunos por disciplina</h6></div>
                   <canvas id="participacao-disciplina"></canvas>
                   </div>
-                  
+</div>
     <footer class="rodape-tela-principal">
       <center>
         <p class="rodape-texto-tela-principal"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16" style="margin: 0 5px 0 0;" >
@@ -153,27 +156,6 @@
     <div id="menu-div-transparente"></div>
 
     <script>
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Obtém o botão hamburguer pelo ID
-    var btnHamburguer = document.getElementById("btn-hamburguer");
-    
-    // Obtém a div transparente pelo ID
-    var divTransparente = document.getElementById("menu-div-transparente");
-    
-    // Adiciona um evento de clique ao botão hamburguer
-    btnHamburguer.addEventListener("click", function() {
-        // Verifica o estado atual da div transparente
-        if (divTransparente.style.display === "block") {
-            // Se estiver visível, oculta a div
-            divTransparente.style.display = "none";
-        } else {
-            // Se estiver oculta, mostra a div
-            divTransparente.style.display = "block";
-        }
-    });
-});
-
 
     function toggleMenu() {
       var menuVertical = document.querySelector(".menu-vertical");
@@ -382,6 +364,63 @@ document.addEventListener("DOMContentLoaded", function () {
     xhrBarras.send();
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtenha o contexto do canvas
+    var ctxEvolucaoMedia = document.getElementById('evolucao-disciplina').getContext('2d');
+
+    // Faça uma solicitação AJAX para obter os dados de evolução da média por disciplina do seu backend
+    var xhrEvolucaoMedia = new XMLHttpRequest();
+    xhrEvolucaoMedia.open("GET", "../backend/evolucao-media.php", true);
+    xhrEvolucaoMedia.onreadystatechange = function () {
+        if (xhrEvolucaoMedia.readyState == 4 && xhrEvolucaoMedia.status == 200) {
+            var dadosEvolucaoMedia = JSON.parse(xhrEvolucaoMedia.responseText);
+            console.log(dadosEvolucaoMedia); // Adicione esta linha para depurar os dados recebidos
+
+            // Extrai os nomes das disciplinas
+            var disciplinasEvolucaoMedia = Object.keys(dadosEvolucaoMedia);
+
+            // Criação do gráfico de linhas
+            var chartEvolucaoMedia = new Chart(ctxEvolucaoMedia, {
+                type: 'line',
+                data: {
+                    labels: dadosEvolucaoMedia[disciplinasEvolucaoMedia[0]].map(function (item) {
+                        return item.Mes;
+                    }),
+                    datasets: disciplinasEvolucaoMedia.map(function (disciplina) {
+                        return {
+                            label: disciplina,
+                            data: dadosEvolucaoMedia[disciplina].map(function (item) {
+                                return item.MediaPeriodo;
+                            }),
+                            borderColor: getRandomColor(), // Função para obter cores aleatórias
+                            borderWidth: 2,
+                            fill: false
+                        };
+                    })
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+    };
+    xhrEvolucaoMedia.send();
+});
+
+// Função para obter cores aleatórias
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 
 // Função para gerar cores únicas
 function gerarCoresUnicas(quantidade) {
@@ -394,12 +433,27 @@ function gerarCoresUnicas(quantidade) {
     return cores;
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtém o botão hamburguer pelo ID
+    var btnHamburguer = document.getElementById("btn-hamburguer");
+    
+    // Obtém a div transparente pelo ID
+    var divTransparente = document.getElementById("menu-div-transparente");
+    
+    // Adiciona um evento de clique ao botão hamburguer
+    btnHamburguer.addEventListener("click", function() {
+        // Verifica o estado atual da div transparente
+        if (divTransparente.style.display === "block") {
+            // Se estiver visível, oculta a div
+            divTransparente.style.display = "none";
+        } else {
+            // Se estiver oculta, mostra a div
+            divTransparente.style.display = "block";
+        }
+    });
+});
 
-
-
-
-
-    </script>
+</script>
 </body>
 </html>
 
