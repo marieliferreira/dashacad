@@ -145,15 +145,15 @@
 
   <div id="transparente"></div>
 
-<div id="modal-registro-turma">
-    <div id="div-registro-turma">
+<div id="modal-registro-disciplina">
+    <div id="div-registro-disciplina">
     <span><a  class="fa fa-arrow-left" id="btn-voltar-turma" href="home.php"></a></span>
-      <form action="../backend/registro_turma.php" method="POST" >
-        <h4 id="h4-reg-turma">Cadastrando Turma</h4>
-        <label id="nome-turma" for="nome-turma">Insira um nome para a nova turma:</label>
-        <p id="p-turma">Exemplo: 6º ANO A</p>
-        <input type="text" id="input-nome-turma" name="input-nome-turma"><br><br>
-        <button id="btn-salvar-turma"  type ="submit">Criar</button>
+      <form action="../backend/registro_disciplina.php" method="POST" >
+        <h4 id="h4-reg-disciplina">Cadastrando Disciplina</h4>
+        <label id="nome-disciplina" for="nome-disciplina">Insira um nome para a nova disciplina:</label>
+        <p id="p-disciplina">Exemplo: História</p>
+        <input type="text" id="input-nome-disciplina" name="input-nome-disciplina"><br><br>
+        <button id="btn-salvar-disciplina"  type ="submit">Criar</button>
       </form>
     </div>
   </div>
