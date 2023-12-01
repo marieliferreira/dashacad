@@ -31,7 +31,7 @@
         
 
         if (mysqli_query($mysqli,$consulta) === TRUE) {
-            header("Location: ../frontend/exibe-turmas.php");
+            header("Location: ../frontend/exibe_turma.php");
         } else {
             echo "Erro ao salvar registro: " . $consulta->error;
         }

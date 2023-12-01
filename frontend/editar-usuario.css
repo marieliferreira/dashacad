@@ -1,0 +1,90 @@
+#editar-foto{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 30px;
+}
+
+#borda-perfil{
+    height: 400px;
+    width: 400px;
+    border: solid rgba(0, 0, 0, 0.3) 1px;
+    border-radius: 10px;
+    padding: 40px;
+    margin-top: 90px;
+    margin-bottom: 30px;
+}
+
+#borda-perfil-edicao{
+    height: 450px;
+    width: 400px;
+    border: solid rgba(0, 0, 0, 0.3) 1px;
+    border-radius: 10px;
+    padding: 40px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+#h3-titulo-perfil{
+    margin-bottom: 30px;
+}
+
+#editar-nome{
+    font-size: 18px;
+}
+
+#editar-email{
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+#btn-voltar-home{
+  position: absolute;
+  color: #767676;
+  font-size: 22px;
+  text-decoration: none;
+  top: 140px;
+  left: 480px;
+}
+
+#btn-voltar-exibir-edicao{
+  position: absolute;
+  color: #767676;
+  font-size: 22px;
+  text-decoration: none;
+  top: 140px;
+  left: 520px;
+}
+
+.btn-editar{
+    background-color: rgba(0, 0, 0, 0.387);
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-editar:hover{
+    background-color: rgba(2, 61, 84, 0.85); 
+}
+
+.btn-logout{
+    background-color: rgb(255, 0, 0);
+    padding: 5px;
+    color: #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+    border-color:  rgb(255, 0, 0);
+}
+
+.custom-container {
+    max-width: 500px;
+    width: 100%;
+}
+
+#h2-editar-perfil{
+    width: 300px;
+    margin-bottom: 30px;
+    color: #023D54;
+}
+

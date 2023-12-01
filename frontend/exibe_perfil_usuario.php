@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="editar-usuario.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
     <title>DashAcad - Perfil</title>
 </head>
 <body>
@@ -29,36 +32,26 @@
     }
 ?>
 
+
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-sm-4 div-foto-perfil">
-                    <img src="<?php echo $foto_usuario; ?>" alt="Foto do perfil" class="img-fluid rounded-circle">
+        <div class="col-sm-5 mx-auto"> <!-- Adicione a classe mx-auto aqui -->
+            <div class="conteudo-perfil text-center">
+            <span ><a  class="fa fa-arrow-left" id="btn-voltar-home" href="home_aluno.php"></a></span>
+                <div id="borda-perfil" class="text-center">
+                    <h3 id="h3-titulo-perfil">Perfil do Usuário</h3>
+                    <p><strong></strong> <img id="editar-foto" src="<?php echo $foto_usuario; ?>" alt="Foto do Usuário"></p>
+                    <p id="editar-nome"><strong>Nome:</strong> <?php echo $nome_usuario; ?></p>
+                    <p id="editar-email"><strong>Email:</strong> <?php echo $email_usuario; ?></p>
+                    <a href="../frontend/editar_perfil_usuario.php" class="btn-editar">Editar Perfil</a>
                 </div>
-                <div class="col-sm-8">
-                    <h6 id="nome-usuario"><?php echo $nome_usuario; ?></h6>
-                    <p id="email-usuario"><?php echo $email_usuario; ?></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="conteudo-perfil">
-                <h1>Perfil do Usuário</h1>
-                <p><strong>Nome:</strong> <?php echo $nome_usuario; ?></p>
-                <p><strong>Email:</strong> <?php echo $email_usuario; ?></p>
-                <p><strong>Foto:</strong> <img src="<?php echo $foto_usuario; ?>" alt="Foto do Usuário"></p>
                 <!-- Adicione mais informações do perfil aqui -->
             </div>
-            <div class="botoes-perfil">
-                <!-- Botão para editar perfil -->
-                <a href="../frontend/editar_perfil_usuario.php" class="btn btn-primary">Editar Perfil</a>
-                
                 <!-- Botão para fazer logout -->
-                <form method="post" action="perfil.php">
-                    <button type="submit" name="botao-logout" class="btn btn-danger">Logout</button>
-                </form>
-            </div>
+                
+                    <a href="../frontend/login.html" type="button" name="botao-logout" class="btn-logout">Logout</a>
+                
+            
         </div>
     </div>
 </div>
