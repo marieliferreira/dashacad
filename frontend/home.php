@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chart.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    
 
     <script src="script.js"></script>
     <title>DashAcad</title>
@@ -168,7 +168,7 @@
     // Adiciona um evento de clique ao botão
     btnLinha.addEventListener("click", function() {
         // Redireciona para a página chart.php
-        window.location.href = "linha-evolucao.php";
+        window.location.href = "graficos-linha.php";
     });
 
     var btnPizza = document.getElementById("btn-pizza");
@@ -176,7 +176,7 @@
     // Adiciona um evento de clique ao botão
     btnPizza.addEventListener("click", function() {
         // Redireciona para a página chart.php
-        window.location.href = "pizza-acertos.php";
+        window.location.href = "graficos-pizza.php";
     });
 
     var btnColuna = document.getElementById("btn-coluna");
@@ -184,7 +184,7 @@
     // Adiciona um evento de clique ao botão
     btnColuna.addEventListener("click", function() {
         // Redireciona para a página chart.php
-        window.location.href = "comparativo-media.php";
+        window.location.href = "grafico-coluna.php";
     });
 
     var btnBarra = document.getElementById("btn-barra");
@@ -192,7 +192,7 @@
     // Adiciona um evento de clique ao botão
     btnBarra.addEventListener("click", function() {
         // Redireciona para a página chart.php
-        window.location.href = "barra-formularios-respondidos.php";
+        window.location.href = "grafico-barra.php";
     });
 
     var coresVivas = [

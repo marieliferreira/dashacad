@@ -94,9 +94,9 @@ if(isset($_POST['botao-logout'])){
             </div>
 <div class="print-container">
     <div id="div-fundo-grafico">
-        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home.php"></a>
+        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="graficos-pizza.php"></a>
         <form id="filtro-form">
-            <h4 id="h4-grafico-pizza" class="print-only">Gráfico de pizza</h4>
+            <h4 id="h4-grafico-pizza" class="print-only">Desempenho do aluno por formulário</h4>
             <label id="lbl-aluno" for="aluno">Alunos:</label>
             <select id="aluno" name="aluno">
                 <option value="">Selecione um aluno</option>

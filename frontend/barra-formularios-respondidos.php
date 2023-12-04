@@ -95,9 +95,9 @@ if(isset($_POST['botao-logout'])){
 
 <div class="print-container">
     <div id="div-fundo-grafico">
-        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home.php"></a>
+        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="grafico-barra.php"></a>
         <form id="filtro-form">
-            <h4 id="h4-grafico-barra" class="print-only">Gráfico de barra</h4>
+            <h4 id="h4-grafico-barra-form-respondidos" class="print-only">Formulários respondidos</h4>
             <label id="lbl-disciplina-barra" for="disciplina-barra">Disciplina:</label>
             <select id="disciplina-barra" name="disciplina-barra">
                 <option value="">Escolha a disciplina</option>

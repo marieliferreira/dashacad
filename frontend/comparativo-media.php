@@ -94,9 +94,9 @@ if(isset($_POST['botao-logout'])){
             </div>
 <div class="print-container">
     <div id="div-fundo-grafico">
-        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home.php"></a>
+        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="grafico-coluna.php"></a>
         <form id="filtro-form">
-            <h4 id="h4-grafico-coluna" class="print-only">Gráfico de colunas</h4>
+            <h4 id="h4-grafico-coluna-comparativo-media" class="print-only">Comparativo de média por aluno</h4>
             <label id="lbl-turma-coluna" for="turma-coluna">Turma:</label>
             <select id="turma-coluna" name="turma-coluna">
                 <option value="">Selecione uma turma</option>

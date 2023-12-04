@@ -12,7 +12,6 @@
     <title>DashAcad</title>
 </head>
 <body>
-
 <?php
 
 session_start();
@@ -31,7 +30,6 @@ if(isset($_POST['botao-logout'])){
   session_destroy();
   header("Location: login.html");
 }
-    
 
 ?>
 
@@ -94,33 +92,27 @@ if(isset($_POST['botao-logout'])){
             </li>
           </ul>
             </div>
-  
 <div class="print-container">
-  <div id="div-fundo-grafico">
-  <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="graficos-linha.php"></a>
-    <form id="filtro-form" >
-          <h4 id="h4-grafico-linha-evolucao" class="print-only">Gráfico de linhas</h4>
-    
-          <label id="lbl-aluno" for="aluno">Alunos:</label>
-          <select id="aluno" name="aluno" >
-          <option value="">Selecione um aluno</option>
-          </select>
-    
-          <a id="btn-filtrar" class="no-print" type ="button">Filtrar</a>
-    </form>
+    <div id="div-fundo-grafico">
+        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="graficos-linha.php"></a>
+        <form id="filtro-form">
+            <h4 id="h4-grafico-quant-aluno-turma" class="print-only">Evolução da Média por Disciplina</h4>
+            
+            
+        <button id="btn-imprimir" class="no-print" type="button">Imprimir Gráfico</button>
+        <div id="div-quant-aluno-turma">
+            <canvas id="myChart" class="print-only" style="width:100%;max-width:700px"></canvas>
+        </div>
 
-    <button id="btn-imprimir" class="no-print" type="button">Imprimir Gráfico</button>
-    <div id="menu-div-transparente"></div>
-
+        <div id="menu-div-transparente"></div>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         </script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <script src="script.js"></script>
-       
-    
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
     // Obtém o botão hamburguer pelo ID
     var btnHamburguer = document.getElementById("btn-hamburguer");
     
@@ -146,131 +138,109 @@ if(isset($_POST['botao-logout'])){
       menuVertical.classList.toggle("menu-oculto");
     }
 
-      $(document).ready(function() {
-        // chama a função ao carregar a página
-        preencheSelectAluno();
-      });
-    function preencheSelectAluno() {
-        // faz uma solicitação AJAX para o arquivo PHP
-        $.ajax({
-          url: '../backend/consulta_aluno.php',
-          type: 'POST',
-          dataType: 'json',
-          success: function(data) {
-            // adiciona cada turma como uma opção no campo select
-            for (var i = 0; i < data.length; i++) {
-              $('#aluno').append($('<option>', {
-                value: data[i].USU_CODIGO,
-                text: data[i].USU_NOME
-              }));
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-          }
-        });
-      }
-    </script>
-      <div>
-        <canvas id="myChart" class="print-only" style="width:100%;max-width:700px"></canvas>
-      </div>
 
-      
-    <script>
-        $(document).ready(function () {
-        // Manipula o clique no botão "Filtrar"
-        $('#btn-filtrar').on('click', function () {
-            // Obtem o valor selecionado do <select>
-            var alunoSelecionado = $('#aluno').val();
-            // Realiza a solicitação AJAX com o valor do aluno selecionado
-            $.ajax({
-                type: "POST",
-                url: "../backend/chart.php",
-                data: { aluno: alunoSelecionado },
-                dataType: "json",
-                success: function (data) {
-                    // Processa os dados e cria o gráfico
-                    if (data && data.length > 0) {
-                        var formularioarray = [];
-                        var notaarray = [];
-                        for (var i = 0; i < data.length; i++) {
-                            formularioarray.push(data[i].FOR_CODIGO); // Pegando o formulario
-                            notaarray.push(data[i].NFO_NOTA); // Pegando a nota
-                        }
-                        criarGrafico(formularioarray, notaarray);
-                    } else {
-                        console.error("Dados inválidos ou vazios.");
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(textStatus, errorThrown);
-                }
-            });
-        });
-
-        // Manipula o clique no botão "Imprimir"
-        $('#btn-imprimir').on('click', function () {
-            // Chame a função para imprimir o gráfico
-            imprimirGrafico();
-        });
-
-        function imprimirGrafico() {
-            window.print();
-        }
-
-        });
-        
-// Função para criar o gráfico
-function criarGrafico(formulario, nota) {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = null;
-
+    document.addEventListener("DOMContentLoaded", function() {
+    // Obtém o botão hamburguer pelo ID
+    var btnHamburguer = document.getElementById("btn-hamburguer");
     
-    // Verifica se já existe um gráfico e o destrói
-    if (chart !== null) {
-        chart.destroy();
-    }
-
-    chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: formulario,
-            datasets: [{
-                label: 'Nota',
-                backgroundColor: 'transparent',
-                borderColor: 'blue',
-                data: nota
-            }]
-        },
-        options: {
-          title: { // Adicione esta seção para o título
-            display: true,
-            text: 'Evolução do aluno', // Substitua por seu título desejado
-            fontSize: 16, // Tamanho da fonte do título
-            fontColor: 'black' // Cor da fonte do título
-        },
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Formulários', // Substitua 'Eixo X' pelo rótulo desejado para o eixo X
-                    },
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Notas', // Substitua 'Eixo Y' pelo rótulo desejado para o eixo Y
-                    },
-                }],
-            }
+    // Obtém a div transparente pelo ID
+    var divTransparente = document.getElementById("menu-div-transparente");
+    
+    // Adiciona um evento de clique ao botão hamburguer
+    btnHamburguer.addEventListener("click", function() {
+        // Verifica o estado atual da div transparente
+        if (divTransparente.style.display === "block") {
+            // Se estiver visível, oculta a div
+            divTransparente.style.display = "none";
+        } else {
+            // Se estiver oculta, mostra a div
+            divTransparente.style.display = "block";
         }
     });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtenha o contexto do canvas
+    var ctxEvolucaoMedia = document.getElementById('myChart').getContext('2d');
+
+    // Faça uma solicitação AJAX para obter os dados de evolução da média por disciplina do seu backend
+    var xhrEvolucaoMedia = new XMLHttpRequest();
+    xhrEvolucaoMedia.open("GET", "../backend/evolucao-media.php", true);
+    xhrEvolucaoMedia.onreadystatechange = function () {
+        if (xhrEvolucaoMedia.readyState == 4 && xhrEvolucaoMedia.status == 200) {
+            var dadosEvolucaoMedia = JSON.parse(xhrEvolucaoMedia.responseText);
+            console.log(dadosEvolucaoMedia); // Adicione esta linha para depurar os dados recebidos
+
+            // Extrai os nomes das disciplinas
+            var disciplinasEvolucaoMedia = Object.keys(dadosEvolucaoMedia);
+
+            // Criação do gráfico de linhas
+            var chartEvolucaoMedia = new Chart(ctxEvolucaoMedia, {
+                type: 'line',
+                data: {
+                    labels: dadosEvolucaoMedia[disciplinasEvolucaoMedia[0]].map(function (item) {
+                        return item.Mes;
+                    }),
+                    datasets: disciplinasEvolucaoMedia.map(function (disciplina) {
+                        return {
+                            label: disciplina,
+                            data: dadosEvolucaoMedia[disciplina].map(function (item) {
+                                return item.MediaPeriodo;
+                            }),
+                            borderColor: getRandomColor(), // Função para obter cores aleatórias
+                            borderWidth: 2,
+                            fill: false
+                        };
+                    })
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+    };
+    xhrEvolucaoMedia.send();
+});
+
+// Função para obter cores aleatórias
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 
-    </script>
-    
-  </div>
+// Função para gerar cores únicas
+function gerarCoresUnicas(quantidade) {
+    var cores = [];
+    for (var i = 0; i < quantidade; i++) {
+        // Gere cores RGB aleatórias
+        var cor = 'rgba(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ', 0.5)';
+        cores.push(cor);
+    }
+    return cores;
+}
+
+        // Manipula o clique no botão "Imprimir"
+        $('#btn-imprimir').on('click', function () {
+                // Chame a função para imprimir o gráfico
+                imprimirGrafico();
+            });
+
+            function imprimirGrafico() {
+                window.print();
+            }
+
+        </script>
+    </div>
 </div>
 </body>
 </html>
+

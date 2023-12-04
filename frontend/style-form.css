@@ -372,6 +372,20 @@ td{
   color: #023D54;
 }
 
+#h4-form-pendente{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 360px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
 #h4-reg-form{
   position: absolute;
   width: 400px;
@@ -388,9 +402,37 @@ td{
 
 #h4-grafico-pizza{
   position: absolute;
-  width: 400px;
+  width: 800px;
   height: 41px;
-  left: 500px;
+  left: 350px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-quant-aluno-turma{
+  position: absolute;
+  width: 800px;
+  height: 41px;
+  left: 400px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-engajamento-aluno{
+  position: absolute;
+  width: 800px;
+  height: 41px;
+  left: 360px;
   top: 30px;
   font-family: 'Nunito';
   font-style: normal;
@@ -401,6 +443,20 @@ td{
 }
 
 #h4-grafico-linha{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 400px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-linha-evolucao{
   position: absolute;
   width: 400px;
   height: 41px;
@@ -418,7 +474,21 @@ td{
   position: absolute;
   width: 400px;
   height: 41px;
-  left: 480px;
+  left: 370px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-coluna-comparativo-media{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 400px;
   top: 30px;
   font-family: 'Nunito';
   font-style: normal;
@@ -433,6 +503,20 @@ td{
   width: 400px;
   height: 41px;
   left: 480px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-grafico-barra-form-respondidos{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 450px;
   top: 30px;
   font-family: 'Nunito';
   font-style: normal;

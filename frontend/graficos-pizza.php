@@ -2,40 +2,43 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-form.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="chart.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <script src="script.js"></script>
     <title>DashAcad</title>
 </head>
-<body>
-
 <?php
 
-session_start();
-
-if(!isset($_SESSION['nome'])){
-  echo "<script>window.location.href = 'login.html'; </script>";
-}
-else{
-  $codigo_usuario = $_SESSION['codigo-usuario'];
-  $nome_usuario = $_SESSION['nome'];
-  $email_usuario = $_SESSION['email'];
-  $foto_usuario = $_SESSION['foto'];
-}
-
-if(isset($_POST['botao-logout'])){
-  session_destroy();
-  header("Location: login.html");
-}
+    session_start();
     
+    if(!isset($_SESSION['nome'])){
+      echo "<script>window.location.href = 'login.html'; </script>";
+    }
+    else{
+      $codigo_usuario = $_SESSION['codigo-usuario'];
+      $nome_usuario = $_SESSION['nome'];
+      $email_usuario = $_SESSION['email'];
+      $foto_usuario = $_SESSION['foto'];
+    }
+
+    if(isset($_POST['botao-logout'])){
+      session_destroy();
+      header("Location: login.html");
+  }
+		
 
 ?>
-
-<div class="cabecalho-branco-home no-print">
+<body>
+    <div class="cabecalho-branco-home">
 <span><button id="btn-hamburguer" onclick="toggleMenu()">&#9776;</button></span>
         <div class="container-fluid">
             <div class="row col-md-12">
@@ -63,7 +66,6 @@ if(isset($_POST['botao-logout'])){
           </div>
           
     </div>
-
     <div class="menu-vertical menu-oculto">
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -71,14 +73,14 @@ if(isset($_POST['botao-logout'])){
                 <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
                 </svg></button>
                 <a class="nav-link active" aria-current="page" href="cadastro_turma.php" id="nav-link-cadastrar-turma" style="display:none">Cadastrar</a>
-                <a class="nav-link active" aria-current="page" href="#" id="nav-link-visualizar-turma" style="display:none">Visualizar</a>
+                <a class="nav-link active" aria-current="page" href="exibe_turma.php" id="nav-link-visualizar-turma" style="display:none">Visualizar</a>
             </li>
             <li class="nav-item">
                 <button id="btn-disciplina" onclick="exibirCadastrarDisciplina()">Disciplina <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
                   <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
                 </svg> </button>
-                <a class="nav-link active" aria-current="page" href="#" id="nav-link-cadastrar-disciplina" style="display:none">Cadastrar</a>
-                <a class="nav-link active" aria-current="page" href="#" id="nav-link-visualizar-disciplina" style="display:none">Visualizar</a>
+                <a class="nav-link active" aria-current="page" href="cadastro_disciplina.php" id="nav-link-cadastrar-disciplina" style="display:none">Cadastrar</a>
+                <a class="nav-link active" aria-current="page" href="exibe_disciplina.php" id="nav-link-visualizar-disciplina" style="display:none">Visualizar</a>
             </li>
             <li class="nav-item">
                 <button id="btn-formulario" onclick="exibirCriarFormulario()">Formulário <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text-fill" viewBox="0 0 16 16">
@@ -94,33 +96,37 @@ if(isset($_POST['botao-logout'])){
             </li>
           </ul>
             </div>
-  
-<div class="print-container">
-  <div id="div-fundo-grafico">
-  <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="graficos-linha.php"></a>
-    <form id="filtro-form" >
-          <h4 id="h4-grafico-linha-evolucao" class="print-only">Gráfico de linhas</h4>
-    
-          <label id="lbl-aluno" for="aluno">Alunos:</label>
-          <select id="aluno" name="aluno" >
-          <option value="">Selecione um aluno</option>
-          </select>
-    
-          <a id="btn-filtrar" class="no-print" type ="button">Filtrar</a>
-    </form>
+              
+<div id="div-tbl">
+<span ><a  class="fa fa-arrow-left" id="btn-voltar-disciplina" href="home.php"></a></span>
+    <h4 id="h4-form">Gráficos de pizza</h1>
+    <br>
+    <br>
+    <p>
+    <a href="pizza-acertos.php">Desempenho do aluno por formulário</a>
+    </p>
+    <p>
+        <a href="quant-aluno-turma.php">Quantidade de alunos por turma</a>
+    </p>
 
-    <button id="btn-imprimir" class="no-print" type="button">Imprimir Gráfico</button>
+    
+</div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"       integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+    crossorigin="anonymous">
+
+
     <div id="menu-div-transparente"></div>
 
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-        </script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-        <script src="script.js"></script>
-       
-    
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
+
+    function toggleMenu() {
+      var menuVertical = document.querySelector(".menu-vertical");
+      menuVertical.classList.toggle("menu-oculto");
+    }
+
+
+document.addEventListener("DOMContentLoaded", function() {
     // Obtém o botão hamburguer pelo ID
     var btnHamburguer = document.getElementById("btn-hamburguer");
     
@@ -140,137 +146,7 @@ if(isset($_POST['botao-logout'])){
     });
 });
 
-
-    function toggleMenu() {
-      var menuVertical = document.querySelector(".menu-vertical");
-      menuVertical.classList.toggle("menu-oculto");
-    }
-
-      $(document).ready(function() {
-        // chama a função ao carregar a página
-        preencheSelectAluno();
-      });
-    function preencheSelectAluno() {
-        // faz uma solicitação AJAX para o arquivo PHP
-        $.ajax({
-          url: '../backend/consulta_aluno.php',
-          type: 'POST',
-          dataType: 'json',
-          success: function(data) {
-            // adiciona cada turma como uma opção no campo select
-            for (var i = 0; i < data.length; i++) {
-              $('#aluno').append($('<option>', {
-                value: data[i].USU_CODIGO,
-                text: data[i].USU_NOME
-              }));
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-          }
-        });
-      }
-    </script>
-      <div>
-        <canvas id="myChart" class="print-only" style="width:100%;max-width:700px"></canvas>
-      </div>
-
-      
-    <script>
-        $(document).ready(function () {
-        // Manipula o clique no botão "Filtrar"
-        $('#btn-filtrar').on('click', function () {
-            // Obtem o valor selecionado do <select>
-            var alunoSelecionado = $('#aluno').val();
-            // Realiza a solicitação AJAX com o valor do aluno selecionado
-            $.ajax({
-                type: "POST",
-                url: "../backend/chart.php",
-                data: { aluno: alunoSelecionado },
-                dataType: "json",
-                success: function (data) {
-                    // Processa os dados e cria o gráfico
-                    if (data && data.length > 0) {
-                        var formularioarray = [];
-                        var notaarray = [];
-                        for (var i = 0; i < data.length; i++) {
-                            formularioarray.push(data[i].FOR_CODIGO); // Pegando o formulario
-                            notaarray.push(data[i].NFO_NOTA); // Pegando a nota
-                        }
-                        criarGrafico(formularioarray, notaarray);
-                    } else {
-                        console.error("Dados inválidos ou vazios.");
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(textStatus, errorThrown);
-                }
-            });
-        });
-
-        // Manipula o clique no botão "Imprimir"
-        $('#btn-imprimir').on('click', function () {
-            // Chame a função para imprimir o gráfico
-            imprimirGrafico();
-        });
-
-        function imprimirGrafico() {
-            window.print();
-        }
-
-        });
-        
-// Função para criar o gráfico
-function criarGrafico(formulario, nota) {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = null;
-
-    
-    // Verifica se já existe um gráfico e o destrói
-    if (chart !== null) {
-        chart.destroy();
-    }
-
-    chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: formulario,
-            datasets: [{
-                label: 'Nota',
-                backgroundColor: 'transparent',
-                borderColor: 'blue',
-                data: nota
-            }]
-        },
-        options: {
-          title: { // Adicione esta seção para o título
-            display: true,
-            text: 'Evolução do aluno', // Substitua por seu título desejado
-            fontSize: 16, // Tamanho da fonte do título
-            fontColor: 'black' // Cor da fonte do título
-        },
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Formulários', // Substitua 'Eixo X' pelo rótulo desejado para o eixo X
-                    },
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Notas', // Substitua 'Eixo Y' pelo rótulo desejado para o eixo Y
-                    },
-                }],
-            }
-        }
-    });
-}
-
-
-    </script>
-    
-  </div>
-</div>
+</script>
 </body>
 </html>
+
