@@ -94,7 +94,7 @@
           </ul>
             </div>
 <div id="div-tbl">
-<span ><a  class="fa fa-arrow-left" id="btn-voltar-disciplina" href="home.php"></a></span>
+<span ><a  class="fa fa-arrow-left" id="btn-voltar-disciplina" href="home_aluno.php"></a></span>
     <h4 id="h4-form">Disciplinas</h1>
 
     <?php

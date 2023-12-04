@@ -305,6 +305,30 @@ td{
   font-size: 22px;
 }
 
+#btn-voltar-form-pend{
+  position: absolute;
+  top: 40px;
+  left: 45px;
+  color: #767676;
+  font-size: 22px;
+}
+
+#btn-voltar-form-resp{
+  position: absolute;
+  top: 40px;
+  left: 45px;
+  color: #767676;
+  font-size: 22px;
+}
+
+#btn-voltar-notas-parciais{
+  position: absolute;
+  top: 40px;
+  left: 45px;
+  color: #767676;
+  font-size: 22px;
+}
+
 #btn-voltar-disciplina{
   position: absolute;
   top: 40px;
@@ -377,6 +401,20 @@ td{
   width: 400px;
   height: 41px;
   left: 360px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+#h4-form-respondidos{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 340px;
   top: 30px;
   font-family: 'Nunito';
   font-style: normal;

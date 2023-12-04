@@ -61,9 +61,9 @@
               </div>
             </div>
           </div>
-          <span ><a  class="fa fa-arrow-left" id="btn-voltar" href="home_aluno.php"></a></span>
+          
 <div id="div-tbl">
-
+<span ><a  class="fa fa-arrow-left" id="btn-voltar-form-pend" href="home_aluno.php"></a></span>
     <h4 id="h4-form-pendente">Formulários pendentes</h1>
 
     <?php
