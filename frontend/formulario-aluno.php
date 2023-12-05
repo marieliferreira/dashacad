@@ -29,13 +29,14 @@ if (isset($_POST['botao-logout'])) {
 }
 ?>
 <body>
-    <div class="cabecalho-branco-home">
+<div class="cabecalho-branco-home">
+<span><button id="btn-hamburguer" onclick="toggleMenu()">&#9776;</button></span>
         <div class="container-fluid">
             <div class="row col-md-12">
               <div class="col-sm-4">
                 <div class="row">
                   <div class="col-sm-4 div-foto-perfil">
-                    <img src=<?php echo "'" . $foto_usuario . "'";?> alt="Foto do perfil" class="img-fluid rounded-circle" >
+                    <img src = <?php echo "'" . $foto_usuario . "'";?> alt="Foto do perfil" id="img-fluid-usuario" class="img-fluid rounded-circle" >
                   </div>
                     <div class="col-sm-8">
                       <h6 id="nome-usuario"><?php echo $nome_usuario;?></h6>
@@ -44,10 +45,10 @@ if (isset($_POST['botao-logout'])) {
                 </div>
               </div>
               <div class="col-sm-4 text-center">
-                <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" class="img-fluid">
+                <img src="imagens/Logo-DashAcad01.png" alt="Logo do site" id="img-fluid-logo" class="img-fluid">
               </div>
               <div class="col-sm-4 text-right botao-logout">
-                    <a href="login.html"><svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <a href="login.html"><svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor"      class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                       <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></a>
                 </svg>
@@ -56,7 +57,6 @@ if (isset($_POST['botao-logout'])) {
           </div>
           
     </div>
-
     <?php
     include("../backend/conexao.php");
 
@@ -80,7 +80,7 @@ if (isset($_POST['botao-logout'])) {
     $result = $mysqli->query($query);
     ?>
 
-    
+<a class="fa fa-arrow-left no-print" id="btn-voltar-form-pendente" href="exibe_formulario_aluno.php"></a>
     <div id="titulo-form">
         <span>
             <label id="lbl-codigo-form" for=""><?php echo 'F' . $codigo . '.' ?></label>
@@ -91,7 +91,6 @@ if (isset($_POST['botao-logout'])) {
     
     <div id="questions-form">
         <form id="form-questao" method="POST">
-        <a class="fa fa-arrow-left no-print" id="btn-voltar-registro" href="home_aluno.php"></a>
             <!-- Substitua "processar_respostas.php" pelo script que processará as respostas -->
             <input type="hidden" id="codigo_formulario" name="codigo_formulario" value="<?php echo $codigo ?>">
             <?php
@@ -155,7 +154,7 @@ if (isset($_POST['botao-logout'])) {
                 <div class="modal-body" id="modal-body-resultados">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEMudarTela()">Voltar</button>
                 </div>
             </div>
         </div>
@@ -163,6 +162,15 @@ if (isset($_POST['botao-logout'])) {
 
     
         <script>
+            function fecharEMudarTela() {
+        // Fecha o modal
+        var myModal = new bootstrap.Modal(document.getElementById("resultadoModal"));
+        myModal.hide();
+
+        // Mude para a tela desejada
+        window.location.href = 'exibe_formulario_aluno.php';
+    }
+        
         // Use JavaScript para abrir o modal após a submissão do formulário
         document.getElementById("form-questao").addEventListener("submit", function (e) {
             e.preventDefault(); // Evita que o formulário seja enviado normalmente
