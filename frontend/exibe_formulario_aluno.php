@@ -71,11 +71,12 @@
     include("../backend/conexao.php");
     
     // Consulta SQL para selecionar os formulários que o aluno ainda não respondeu
-    $sql = "SELECT f.* FROM tbl_formulario f
-            LEFT JOIN tbl_nota_formulario nf ON f.FOR_CODIGO = nf.FOR_CODIGO AND nf.USU_CODIGO_CAD = '$codigo_usuario'
-            WHERE nf.FOR_CODIGO IS NULL OR nf.FOR_STATUS != 'respondido'";
+    $sql = "SELECT f.*
+    FROM tbl_formulario f
+    LEFT JOIN tbl_nota_formulario nf ON f.FOR_CODIGO = nf.FOR_CODIGO AND nf.USU_CODIGO_CAD = '$codigo_usuario'
+    INNER JOIN tbl_usuario u ON f.TUR_CODIGO = (SELECT TUR_CODIGO FROM tbl_turma WHERE TUR_SERIE = u.TUR_SERIE LIMIT 1)
+    WHERE (nf.FOR_CODIGO IS NULL OR nf.FOR_STATUS != 'respondido') AND u.USU_CODIGO = '$codigo_usuario'";
 
-    
     // Executa a consulta SQL
     if ($result = $mysqli->query($sql)) {
     
