@@ -103,10 +103,10 @@
     <br>
     <br>
     <p>
-    <a id="grafico-n1" href="pizza-acertos.php">Desempenho do aluno por formulário</a>
+    <a id="grafico-n1" class="grafico" href="pizza-acertos.php">Desempenho do aluno por formulário</a>
     </p>
     <p>
-        <a id="grafico-n2" href="quant-aluno-turma.php">Quantidade de alunos por turma</a>
+        <a id="grafico-n2" class="grafico" href="quant-aluno-turma.php">Quantidade de alunos por turma</a>
     </p>
 
     

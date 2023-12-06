@@ -103,10 +103,10 @@
     <br>
     <br>
     <p>
-    <a href="comparativo-media.php">Comparativo de média por aluno</a>
+    <a id="grafico-n1" class="grafico" href="comparativo-media.php">Comparativo de média por aluno</a>
     </p>
     <p>
-        <a href="comparativo-media-turma.php">Compartivo de média por turma</a>
+        <a id="grafico-n2" class="grafico" href="comparativo-media-turma.php">Compartivo de média por turma</a>
     </p>
 
     

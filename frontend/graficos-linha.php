@@ -103,10 +103,10 @@
     <br>
     <br>
     <p>
-    <a href="linha-evolucao.php">Evolução por aluno</a>
+    <a id="grafico-n1" class="grafico" href="linha-evolucao.php">Evolução por aluno</a>
     </p>
     <p>
-        <a href="evolucao-media-disciplina.php">Evolução de média por disciplina</a>
+        <a id="grafico-n2" class="grafico" href="evolucao-media-disciplina.php">Evolução de média por disciplina</a>
     </p>
 
     

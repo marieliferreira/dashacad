@@ -1128,6 +1128,10 @@ td{
   font-size: 18px;
 }
 
+#grafico-n1:hover{
+  color: #FFFFFF;
+}
+
 #grafico-n2{
   position: absolute;
   color: #023D54;
@@ -1136,3 +1140,42 @@ td{
   font-weight: bold;
   font-size: 18px;
 }
+
+#grafico-n2:hover{
+  color: #FFFFFF;
+}
+
+.grafico{
+  border: 1px solid #023D54;
+  width: 800px;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.grafico:hover{
+  color: white;
+  background-color: #023D54;
+}
+
+#h4-form-notas-parciais{
+  position: absolute;
+  width: 400px;
+  height: 41px;
+  left: 410px;
+  top: 30px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 41px;
+  color: #023D54;
+}
+
+.msg-vazio{
+  position: absolute; 
+  top: 200px; 
+  left:360px; 
+  font-size: 18px; 
+  color: #767676;
+}
+

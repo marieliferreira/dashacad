@@ -119,7 +119,7 @@
                 // Libera o resultado
                 $result->free();
             } else {
-                echo "Não foram encontrados registros.";
+                echo "<p class='msg-vazio'>Não foram encontrados registros.</p>";
             }
         } else {
             echo "Erro ao executar a consulta: (" . $mysqli->errno . ") " . $mysqli->error;

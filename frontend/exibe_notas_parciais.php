@@ -65,7 +65,7 @@
 
 <div id="div-tbl">
 <span ><a class="fa fa-arrow-left" id="btn-voltar-notas-parciais" href="home_aluno.php"></a></span>
-    <h4 id="h4-form">Notas Parciais</h1>
+    <h4 id="h4-form-notas-parciais">Notas Parciais</h1>
 
     <?php
         include("../backend/conexao.php");
@@ -101,7 +101,7 @@
 
                 echo "</table>";
             } else {
-                echo "Não foram encontrados registros.";
+                echo "<p class='msg-vazio'>Não foram encontrados registros.</p>";
             }
 
             $result->free();
