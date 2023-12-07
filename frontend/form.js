@@ -10,6 +10,7 @@ function addQuestion(codigo_questao, nome_questao) {
 
   var questionLabel = document.createElement("label");
   questionLabel.textContent = questionCount + ". Questão:";
+  questionLabel.className = "texto-justificado";
   var questionInput = document.createElement("input");
   questionInput.className = "question-input";
   questionInput.type = "text";

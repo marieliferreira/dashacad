@@ -1179,3 +1179,7 @@ td{
   color: #767676;
 }
 
+.texto-justificado{
+  max-width: 600px;
+  text-align: justify;
+}

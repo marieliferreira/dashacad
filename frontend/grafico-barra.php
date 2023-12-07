@@ -103,7 +103,7 @@
     <br>
     <br>
     <p>
-    <a id="grafico-n1" class="grafico" href="barra-formularios-respondidos.php">Quantidade de formulários respondidos</a>
+    <a id="grafico-n1" class="grafico" href="barra-formularios-respondidos.php">Quantidade de alunos que responderam ao questionário</a>
     </p>
     <p>
         <a id="grafico-n2" class="grafico" href="engajamento-alunos.php">Engajamento dos alunos por disciplina</a>
