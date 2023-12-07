@@ -12,7 +12,7 @@ tbl_formulario f ON nf.FOR_CODIGO = f.FOR_CODIGO
 INNER JOIN
 tbl_turma t ON f.TUR_CODIGO = t.TUR_CODIGO
 GROUP BY
-t.TUR_SERIE, f.USU_CODIGO_CAD  -- Agrupa por turma e usuário
+t.TUR_SERIE  -- Agrupa apenas por turma
 ORDER BY
 t.TUR_SERIE;";
 $resultado_media = mysqli_query($mysqli, $consulta_media);
